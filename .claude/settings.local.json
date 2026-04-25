@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -c ':*)",
+      "Bash(python)",
+      "Bash(grep -n \"9330497008007\\\\|27732\" /c/Users/Matthias/Downloads/crisponcreek2404/crisponcreek/*.json)",
+      "Bash(python fix_images.py)"
+    ]
+  }
+}
