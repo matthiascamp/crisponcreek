@@ -1,0 +1,66 @@
+:root {
+  --account-bar-background-color: #666666;
+  --account-bar-text-color: #fff; }
+
+.mfl-menu__item--selected > a {
+  color: #fff;
+  background-color: #666666; }
+  .mfl-menu__item--selected > a:hover {
+    color: #fff;
+    background-color: #666666; }
+
+.TrolleyButton {
+  border: 1px solid rgba(255, 255, 255, 0.3); }
+
+.btn--account-bar {
+  color: white;
+  background-color: #666666;
+  box-shadow: none; }
+  .btn--account-bar:hover {
+    color: white; }
+  .btn--account-bar .caret {
+    border-top-color: white; }
+  .btn--account-bar:hover {
+    background-color: #616161; }
+  .btn--account-bar:active {
+    background-color: #5c5c5c; }
+
+.mfl-SearchBox--AccountBar input {
+  border: none; }
+
+.mfl-SearchBox--AccountBar button {
+  color: white;
+  background-color: gray;
+  box-shadow: none; }
+  .mfl-SearchBox--AccountBar button:hover {
+    color: white; }
+  .mfl-SearchBox--AccountBar button .caret {
+    border-top-color: white; }
+  .mfl-SearchBox--AccountBar button:hover {
+    background-color: #7a7a7a; }
+  .mfl-SearchBox--AccountBar button:active {
+    background-color: #757575; }
+
+.mfl-pjax-loading-bar:after {
+  background-color: #8c8c8c; }
+
+.qi-s-inactive, .qi-s-zero {
+  color: #373737;
+  background-color: #f7f7f7;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05); }
+  .qi-s-inactive:hover, .qi-s-zero:hover {
+    color: #373737; }
+  .qi-s-inactive .caret, .qi-s-zero .caret {
+    border-top-color: #373737; }
+  .qi-s-inactive:hover, .qi-s-zero:hover {
+    background-color: #f2f2f2; }
+  .qi-s-inactive:active, .qi-s-zero:active {
+    background-color: #ededed; }
+
+.mfl-header__logo {
+  margin-top: 0px;
+  margin-bottom: 0px; }
+
+:root {
+  --loyalty-virtualcard-background-color: var(--account-bar-background-color);
+  --loyalty-virtualcard-foreground-color: var(--account-bar-text-color, var(--default-text-color)); }
