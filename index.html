@@ -149,7 +149,7 @@ header.scrolled{background:rgba(255,255,255,.85);box-shadow:0 8px 40px rgba(27,6
 .page-header h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--forest);margin-bottom:8px}
 .page-header p{font-size:15px;color:var(--textS);max-width:500px;margin:0 auto}
 .page-header-icon{font-size:3rem;margin-bottom:12px}
-.page-header-icon img{width:80px;height:80px;border-radius:50%;object-fit:cover;box-shadow:0 4px 16px rgba(27,67,50,.12)}
+.page-header-photo{width:100px;height:100px;border-radius:50%;object-fit:cover;box-shadow:0 4px 16px rgba(27,67,50,.12);border:3px solid rgba(255,255,255,.7)}
 
 /* -- Sidebar -- */
 .page-layout{max-width:1280px;margin:0 auto;padding-top:100px}
@@ -1237,9 +1237,13 @@ const SUB_CAT_PHOTOS = {
   'Newsagent':'crisp_on_creek_images/Nescafe_Gld_Cof_Original_100G.jpg',
   'Best Sellers':'crisp_on_creek_fruit_veg_images/Bananas_Cavendish_.jpg'
 };
-function catIcon(cat, size) {
+function catIcon(cat, size, cssClass) {
   const photo = SUB_CAT_PHOTOS[cat];
-  if (photo) return `<img src="${photo}" style="width:${size||'2.4rem'};height:${size||'2.4rem'};border-radius:50%;object-fit:cover">`;
+  if (photo) {
+    const cls = cssClass ? ` class="${cssClass}"` : '';
+    const style = size ? ` style="width:${size};height:${size};border-radius:50%;object-fit:cover"` : '';
+    return `<img src="${photo}"${cls}${style}>`;
+  }
   return SUB_CAT_ICONS[cat] || '📦';
 }
 
@@ -1555,7 +1559,7 @@ async function renderSubCategory(catName, page, search) {
 
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
   const pageItems = items.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
-  const icon = catIcon(catName, '3rem');
+  const icon = catIcon(catName, null, 'page-header-photo');
 
   const mainEl = app.querySelector('main');
   mainEl.innerHTML = `
