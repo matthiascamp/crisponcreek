@@ -391,6 +391,12 @@ const ProductAPI = {
   // Expected response: array of { name, price, pcode, category, rank, sales, img }
   _endpoint: 'top_products.json',
 
+  _isHiddenEgg(p) {
+    const n = p.name.toUpperCase();
+    if (!/EGG/.test(n) || /EGGPLANT|PEGGONI|PAPPARDELLE|FETTUC|RELISH/.test(n)) return false;
+    return !/BIG BOY/i.test(n);
+  },
+
   async _load() {
     if (this._data) return this._data;
     if (this._loading) return this._loading;
@@ -405,23 +411,24 @@ const ProductAPI = {
   },
 
   async getAll() {
-    return this._load();
+    const all = await this._load();
+    return all.filter(p => !this._isHiddenEgg(p));
   },
 
   async getByCategory(category) {
     const all = await this._load();
-    return all.filter(p => p.category === category);
+    return all.filter(p => p.category === category && !this._isHiddenEgg(p));
   },
 
   async getBestSellers(limit) {
     const all = await this._load();
-    return all.slice(0, limit);
+    return all.filter(p => !this._isHiddenEgg(p)).slice(0, limit);
   },
 
   async search(query) {
     const all = await this._load();
     const q = query.toLowerCase();
-    return all.filter(p => p.name.toLowerCase().includes(q));
+    return all.filter(p => p.name.toLowerCase().includes(q) && !this._isHiddenEgg(p));
   },
 
   async getCategoryCounts() {
@@ -911,7 +918,7 @@ async function renderSubCategory(catName, page, search) {
     img: '',
     rank: 0,
     sales: 0
-  }));
+  })).filter(p => !ProductAPI._isHiddenEgg(p));
 
   if (search) {
     const q = search.toLowerCase();
