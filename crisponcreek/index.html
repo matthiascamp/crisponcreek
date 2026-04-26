@@ -3,8 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Crisp on Creek — Fresh Fruit, Veg & Groceries</title>
+<title>Crisp on Creek — Fresh Fruit, Veg & Groceries | Mt Gravatt</title>
+<meta name="description" content="Crisp on Creek is Mt Gravatt's favourite fruit shop and grocer. Fresh produce, quality deli, and everyday groceries at 1164 Cavendish Rd. Open 6am–7pm daily.">
+<meta name="keywords" content="fruit shop, grocer, fresh produce, Mt Gravatt, Cavendish Road, vegetables, deli, groceries, Crisp on Creek">
+<meta name="author" content="Crisp on Creek">
+<meta property="og:title" content="Crisp on Creek — Fresh Fruit, Veg & Groceries">
+<meta property="og:description" content="Your neighbourhood fruit shop and grocer. Fresh produce, quality deli, and everyday groceries. Open 6am–7pm daily at 1164 Cavendish Rd, Mt Gravatt East.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="logo.png">
+<meta property="og:locale" content="en_AU">
+<meta name="theme-color" content="#1B4332">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -45,8 +56,13 @@ header{position:fixed;top:12px;right:16px;left:216px;z-index:200;background:var(
 header.scrolled{background:rgba(255,255,255,.85);box-shadow:0 8px 40px rgba(27,67,50,.12);top:8px}
 .ht{padding:12px 20px;display:flex;align-items:center;gap:12px}
 
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
+.logo-img{width:42px;height:42px;border-radius:10px;object-fit:contain}
+.logo h1{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;font-weight:700;letter-spacing:-.02em;color:var(--forest);line-height:1}
+.logo-t{font-size:9px;color:var(--textM);font-weight:500;letter-spacing:.08em;text-transform:uppercase;margin-top:2px}
+
 /* -- Nav Links -- */
-.nav-links{display:flex;gap:2px;flex-shrink:0}
+.nav-links{display:flex;gap:2px;flex-shrink:0;margin-left:auto}
 .nav-link{padding:10px 18px;border:none;background:transparent;color:var(--textS);font-size:14px;font-weight:500;font-family:inherit;cursor:pointer;transition:all .2s;white-space:nowrap;border-radius:10px;letter-spacing:.02em;text-decoration:none}
 .nav-link:hover{background:var(--lime);color:var(--forest)}
 .nav-link.active{background:var(--forest);color:#fff;font-weight:600;box-shadow:0 2px 8px rgba(27,67,50,.2)}
@@ -59,6 +75,35 @@ header.scrolled{background:rgba(255,255,255,.85);box-shadow:0 8px 40px rgba(27,6
 .sb input::placeholder{color:var(--textM)}
 .sb input:focus{outline:none;border-color:var(--green);background:var(--surface);box-shadow:0 0 0 4px rgba(64,145,108,.12)}
 .si-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--textM);pointer-events:none}
+
+/* -- Search Predictions Dropdown -- */
+.search-dropdown{position:absolute;top:calc(100% + 6px);left:0;right:0;background:var(--surface);border:1px solid var(--border);border-radius:14px;box-shadow:0 12px 40px rgba(27,67,50,.14);max-height:420px;overflow-y:auto;z-index:300;display:none;scrollbar-width:thin;scrollbar-color:var(--mint) transparent}
+.search-dropdown.show{display:block;animation:fadeUp .2s ease}
+.search-dropdown::-webkit-scrollbar{width:4px}
+.search-dropdown::-webkit-scrollbar-thumb{background:var(--mint);border-radius:4px}
+.sd-header{padding:10px 14px 6px;font-size:11px;font-weight:600;color:var(--textM);text-transform:uppercase;letter-spacing:.06em}
+.sd-item{display:flex;align-items:center;gap:12px;padding:8px 14px;cursor:pointer;transition:background .15s;border-radius:0}
+.sd-item:hover{background:var(--lime)}
+.sd-item:last-child{border-radius:0 0 14px 14px}
+.sd-img{width:44px;height:44px;border-radius:10px;overflow:hidden;flex-shrink:0;background:var(--lime);display:flex;align-items:center;justify-content:center}
+.sd-img img{width:100%;height:100%;object-fit:cover}
+.sd-img .sd-emoji{font-size:1.2rem;opacity:.5}
+.sd-info{flex:1;min-width:0}
+.sd-name{font-size:13px;font-weight:500;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sd-name mark{background:rgba(64,145,108,.15);color:var(--forest);font-weight:700;border-radius:2px;padding:0 1px}
+.sd-cat{font-size:11px;color:var(--textM)}
+.sd-price{font-size:15px;font-weight:700;color:var(--forest);white-space:nowrap;flex-shrink:0}
+.sd-unit{font-size:10px;color:var(--textM);font-weight:400;margin-left:2px}
+.sd-add{width:32px;height:32px;border:none;background:var(--forest);color:#fff;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;opacity:0}
+.sd-item:hover .sd-add{opacity:1}
+.sd-add:hover{background:var(--pop);transform:scale(1.1)}
+.sd-footer{padding:8px 14px;text-align:center;border-top:1px solid var(--border);font-size:12px;color:var(--green);font-weight:600;cursor:pointer;transition:background .15s}
+.sd-footer:hover{background:var(--lime)}
+.sd-empty{padding:24px 14px;text-align:center;color:var(--textM);font-size:13px}
+@media(max-width:768px){
+  .search-dropdown{position:fixed;top:auto;bottom:0;left:0;right:0;border-radius:20px 20px 0 0;max-height:60vh;box-shadow:0 -8px 40px rgba(27,67,50,.18)}
+  .sd-add{opacity:1}
+}
 
 /* -- Hero -- */
 .hero{min-height:auto;display:flex;align-items:center;padding:140px 2rem 48px;position:relative;overflow:hidden;background:linear-gradient(160deg,var(--bg) 0%,#e4f0e6 50%,var(--lime) 100%)}
@@ -111,11 +156,11 @@ header.scrolled{background:rgba(255,255,255,.85);box-shadow:0 8px 40px rgba(27,6
 .global-sidebar{position:fixed;top:0;left:0;bottom:0;width:200px;overflow-y:auto;padding:16px 10px 24px;scrollbar-width:thin;scrollbar-color:var(--mint) transparent;background:#fff;border-right:1px solid var(--border);z-index:201}
 .global-sidebar::-webkit-scrollbar{width:4px}
 .global-sidebar::-webkit-scrollbar-thumb{background:var(--mint);border-radius:4px}
-.sidebar-brand{padding:4px 8px 16px;border-bottom:1px solid var(--border);margin-bottom:12px;text-align:center}
-.sidebar-logo{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none}
-.sidebar-logo img{border-radius:10px;object-fit:contain;width:80px;height:auto}
-.sidebar-logo span{font-family:'Playfair Display',Georgia,serif;font-size:.85rem;font-weight:700;color:var(--forest);line-height:1.2}
-.sidebar-logo small{font-size:.65rem;color:var(--textM);font-weight:500;letter-spacing:.05em;text-transform:uppercase}
+.sidebar-brand{padding:6px 10px 14px;border-bottom:1px solid var(--border);margin-bottom:10px}
+.sidebar-brand-link{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--forest)}
+.sidebar-brand-link svg{flex-shrink:0;opacity:.6}
+.sidebar-brand-title{font-family:'Playfair Display',Georgia,serif;font-size:.95rem;font-weight:700;color:var(--forest);line-height:1.1}
+.sidebar-brand-sub{font-size:.6rem;color:var(--textM);font-weight:500;letter-spacing:.04em;text-transform:uppercase;margin-top:1px}
 .sidebar-header{display:none}
 .sidebar-close{display:none}
 .sidebar-list{list-style:none}
@@ -123,8 +168,8 @@ header.scrolled{background:rgba(255,255,255,.85);box-shadow:0 8px 40px rgba(27,6
 .sidebar-link{display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:8px;font-size:13px;font-weight:500;color:var(--textS);cursor:pointer;transition:all .2s;text-decoration:none;border:none;background:none;width:100%;font-family:inherit;text-align:left}
 .sidebar-link:hover{background:var(--lime);color:var(--forest)}
 .sidebar-link.active{background:var(--forest);color:#fff;font-weight:600;box-shadow:0 2px 8px rgba(27,67,50,.15)}
-.sidebar-icon{font-size:1rem;width:22px;text-align:center;flex-shrink:0}
-.sidebar-icon img{vertical-align:middle}
+.sidebar-icon{font-size:1rem;width:24px;height:24px;text-align:center;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.sidebar-icon img{width:24px;height:24px;border-radius:50%;object-fit:cover;display:block}
 .sidebar-count{margin-left:auto;font-size:10px;opacity:.5;font-weight:400}
 .sidebar-link.active .sidebar-count{opacity:.8}
 .sidebar-divider{height:1px;background:var(--border);margin:8px 10px}
@@ -256,6 +301,118 @@ footer::after{content:'';position:absolute;width:500px;height:500px;border-radiu
 .footer-col p{opacity:.6;font-size:14px;line-height:1.9}
 .footer-bottom{max-width:1280px;margin:32px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.08);font-size:12px;opacity:.25;text-align:center;position:relative;z-index:1}
 
+/* -- Open/Closed Badge -- */
+.store-status{display:flex;align-items:center;gap:6px;padding:5px 12px;border-radius:50px;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;flex-shrink:0;white-space:nowrap;transition:all .3s}
+.store-status.open{background:rgba(64,145,108,.12);color:#2D6A4F;border:1px solid rgba(64,145,108,.2)}
+.store-status.closed{background:rgba(232,105,58,.1);color:#c0472b;border:1px solid rgba(232,105,58,.2)}
+.store-status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.store-status.open .store-status-dot{background:#40916C;animation:pulse 2s ease infinite}
+.store-status.closed .store-status-dot{background:#c0472b}
+@media(max-width:768px){.store-status{display:none}}
+
+/* -- About Page -- */
+.about{max-width:900px;margin:0 auto;padding:120px 2rem 80px}
+.about-hero{text-align:center;margin-bottom:48px}
+.about-hero h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--forest);margin-bottom:12px}
+.about-hero p{font-size:17px;color:var(--textS);max-width:600px;margin:0 auto;line-height:1.8}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px}
+.about-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rL);padding:32px;text-align:center;transition:all .3s}
+.about-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(27,67,50,.08)}
+.about-card-icon{font-size:2.4rem;margin-bottom:12px}
+.about-card h3{font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;font-weight:700;color:var(--forest);margin-bottom:8px}
+.about-card p{font-size:14px;color:var(--textS);line-height:1.7}
+.about-story{background:var(--surface);border:1px solid var(--border);border-radius:var(--rL);padding:40px;margin-bottom:32px}
+.about-story h3{font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;font-weight:700;color:var(--forest);margin-bottom:16px}
+.about-story p{font-size:15px;color:var(--textS);line-height:1.8;margin-bottom:16px}
+.about-story p:last-child{margin-bottom:0}
+.about-cta{text-align:center;background:linear-gradient(145deg,var(--lime),#e4f0e6);border-radius:var(--rL);padding:40px;border:1px solid var(--border)}
+.about-cta h3{font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;color:var(--forest);margin-bottom:8px}
+.about-cta p{font-size:14px;color:var(--textS);margin-bottom:20px}
+.about-cta-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:var(--forest);color:#fff;border-radius:14px;font-size:14px;font-weight:600;text-decoration:none;transition:all .2s}
+.about-cta-btn:hover{background:var(--pop);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,105,58,.2)}
+@media(max-width:640px){.about-grid{grid-template-columns:1fr}.about{padding:100px 1rem 60px}}
+
+/* -- Contact Page -- */
+.contact{max-width:900px;margin:0 auto;padding:120px 2rem 80px}
+.contact-hero{text-align:center;margin-bottom:40px}
+.contact-hero h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(2rem,4vw,3rem);font-weight:800;color:var(--forest);margin-bottom:12px}
+.contact-hero p{font-size:17px;color:var(--textS);max-width:600px;margin:0 auto;line-height:1.8}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:32px}
+.contact-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rL);padding:28px;display:flex;align-items:flex-start;gap:16px;transition:all .3s}
+.contact-card:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(27,67,50,.08)}
+.contact-card-icon{width:48px;height:48px;border-radius:14px;background:var(--lime);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0}
+.contact-card h3{font-family:'Playfair Display',Georgia,serif;font-size:1rem;font-weight:700;color:var(--forest);margin-bottom:4px}
+.contact-card p{font-size:14px;color:var(--textS);line-height:1.7}
+.contact-card a{color:var(--forest);font-weight:600;text-decoration:none}
+.contact-card a:hover{color:var(--pop)}
+.contact-hours{background:var(--surface);border:1px solid var(--border);border-radius:var(--rL);padding:28px;margin-bottom:32px}
+.contact-hours h3{font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;font-weight:700;color:var(--forest);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.hours-table{width:100%;border-collapse:collapse}
+.hours-table tr{border-bottom:1px solid var(--border)}
+.hours-table tr:last-child{border:none}
+.hours-table td{padding:10px 0;font-size:14px;color:var(--textS)}
+.hours-table td:first-child{font-weight:600;color:var(--text)}
+.hours-table td:last-child{text-align:right}
+.hours-table tr.today td{color:var(--forest);font-weight:600}
+.hours-table tr.today td:last-child{color:var(--green)}
+.contact-map{border-radius:var(--rL);overflow:hidden;border:1px solid var(--border);height:350px;margin-bottom:32px}
+.contact-map iframe{width:100%;height:100%;border:0}
+.contact-phone-cta{text-align:center;background:linear-gradient(145deg,var(--lime),#e4f0e6);border-radius:var(--rL);padding:40px;border:1px solid var(--border)}
+.contact-phone-cta h3{font-family:'Playfair Display',Georgia,serif;font-size:1.3rem;color:var(--forest);margin-bottom:8px}
+.contact-phone-cta p{font-size:14px;color:var(--textS);margin-bottom:20px}
+.contact-phone-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--forest);color:#fff;border-radius:14px;font-size:1.2rem;font-weight:700;text-decoration:none;transition:all .2s;font-family:'Playfair Display',Georgia,serif}
+.contact-phone-btn:hover{background:var(--pop);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,105,58,.25)}
+.contact-phone-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:640px){.contact-grid{grid-template-columns:1fr}.contact{padding:100px 1rem 60px}}
+
+/* -- Specials Banner -- */
+.specials-banner{max-width:1280px;margin:0 auto;padding:32px 2rem 0}
+.specials-inner{background:linear-gradient(135deg,var(--forest) 0%,var(--forestM) 100%);border-radius:var(--rL);padding:32px;color:#fff;position:relative;overflow:hidden}
+.specials-inner::after{content:'';position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,255,255,.04);top:-100px;right:-80px}
+.specials-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:4px 14px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px}
+.specials-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--golden);animation:pulse 2s ease infinite}
+.specials-title{font-family:'Playfair Display',Georgia,serif;font-size:1.6rem;font-weight:700;margin-bottom:8px}
+.specials-sub{font-size:14px;opacity:.7;margin-bottom:20px;max-width:500px}
+.specials-items{display:flex;gap:12px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;-ms-overflow-style:none}
+.specials-items::-webkit-scrollbar{display:none}
+.specials-item{flex-shrink:0;background:rgba(255,255,255,.1);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:14px;display:flex;align-items:center;gap:12px;min-width:220px;cursor:pointer;transition:all .2s}
+.specials-item:hover{background:rgba(255,255,255,.18);transform:translateY(-2px)}
+.specials-item-img{width:52px;height:52px;border-radius:12px;overflow:hidden;flex-shrink:0;background:rgba(255,255,255,.1)}
+.specials-item-img img{width:100%;height:100%;object-fit:cover}
+.specials-item-info{min-width:0}
+.specials-item-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.specials-item-price{font-size:18px;font-weight:700;font-family:'Playfair Display',Georgia,serif;color:var(--golden)}
+.specials-item-unit{font-size:11px;opacity:.6}
+
+/* -- Season Banner -- */
+.season-strip{max-width:1280px;margin:0 auto;padding:32px 2rem 0}
+.season-inner{background:linear-gradient(145deg,#fff9e6,#fff3cc);border:1px solid rgba(245,166,35,.15);border-radius:var(--rL);padding:28px 32px;display:flex;align-items:center;gap:24px;overflow:hidden}
+.season-icon{font-size:2.4rem;flex-shrink:0}
+.season-text h3{font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;font-weight:700;color:var(--forest);margin-bottom:4px}
+.season-text p{font-size:13px;color:var(--textS);line-height:1.6}
+.season-items{display:flex;gap:8px;margin-left:auto;flex-shrink:0}
+.season-chip{background:rgba(27,67,50,.06);border:1px solid var(--border);border-radius:50px;padding:6px 14px;font-size:12px;font-weight:600;color:var(--forest);white-space:nowrap;display:flex;align-items:center;gap:4px}
+@media(max-width:768px){
+  .season-inner{flex-direction:column;text-align:center;gap:12px}
+  .season-items{margin-left:0;flex-wrap:wrap;justify-content:center}
+  .specials-items{gap:10px}
+}
+
+/* -- Legal Pages -- */
+.legal{max-width:800px;margin:0 auto;padding:120px 2rem 80px}
+.legal h2{font-family:'Playfair Display',Georgia,serif;font-size:clamp(1.8rem,3.5vw,2.4rem);font-weight:800;color:var(--forest);margin-bottom:8px;text-align:center}
+.legal .legal-sub{font-size:13px;color:var(--textM);text-align:center;margin-bottom:32px}
+.legal h3{font-family:'Playfair Display',Georgia,serif;font-size:1.1rem;font-weight:700;color:var(--forest);margin:28px 0 10px}
+.legal p,.legal li{font-size:14px;color:var(--textS);line-height:1.8;margin-bottom:10px}
+.legal ol{padding-left:24px;margin-bottom:16px}
+.legal ol li{margin-bottom:6px}
+.legal a{color:var(--green);font-weight:500}
+.legal a:hover{color:var(--pop)}
+.legal-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rL);padding:32px;margin-bottom:24px}
+.legal-back{display:block;margin:24px auto 0;padding:12px 24px;border:1px solid var(--border);background:var(--surface);border-radius:12px;font-size:14px;color:var(--textS);cursor:pointer;font-family:inherit;transition:all .2s;text-align:center;text-decoration:none;width:fit-content}
+.legal-back:hover{border-color:var(--green);background:var(--lime)}
+@media(max-width:768px){.legal{padding:90px 1rem 60px}}
+
 /* -- Misc -- */
 .sri{padding:20px 0 8px;font-size:16px;color:var(--text);font-weight:600;display:none;animation:fadeUp .4s ease}
 .st{position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;border-radius:14px;background:var(--forest);color:#fff;border:none;font-size:14px;cursor:pointer;box-shadow:0 4px 20px rgba(27,67,50,.2);transition:all .25s;opacity:0;pointer-events:none;z-index:50}
@@ -272,37 +429,89 @@ footer::after{content:'';position:absolute;width:500px;height:500px;border-radiu
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* -- Responsive -- */
+
+/* Large tablets / small desktops */
+@media(max-width:1200px){
+  .nav-link{padding:8px 12px;font-size:13px}
+  .footer-inner{grid-template-columns:1.5fr 1fr 1fr !important;gap:32px}
+  .footer-inner>:last-child{display:none}
+}
+
+/* Tablets */
 @media(max-width:1024px){
   .hero-inner{grid-template-columns:1fr;text-align:center;gap:40px}
   .hero p{margin-left:auto;margin-right:auto}
   .hero-actions{justify-content:center}
   .hero-visual{order:-1}
   .wheel-scene{max-width:420px}
+  .specials-banner,.season-strip,.catstrip{padding-left:1.5rem;padding-right:1.5rem}
+  .specials-inner{padding:24px}
+  .specials-title{font-size:1.3rem}
+  .footer-inner{grid-template-columns:1fr 1fr !important;gap:24px}
 }
+
+/* Mobile */
 @media(max-width:768px){
   header{top:10px;left:12px;right:12px;border-radius:16px}
   .ht{padding:10px 12px;gap:6px}
   .nav-links{display:none}
   .nav-sep{display:none}
   .nav-icon-btn{display:none}
+  .logo h1{font-size:1rem}
+  .logo-t{display:none}
+  .logo-img{width:36px;height:36px;border-radius:8px}
   .sb{flex:1;min-width:0}
-  .hero{min-height:auto;padding:90px 1rem 40px}
+  .sb input{font-size:14px;padding:10px 14px 10px 36px}
+  .hero{min-height:auto;padding:80px 1rem 32px}
   .hero h2{font-size:2rem}
+  .hero p{font-size:14px}
+  .hero-tag{font-size:10px;padding:5px 12px}
+  .hero-btn{padding:12px 20px;font-size:13px}
   .wheel-scene{max-width:300px}
   .wheel-card{width:100px;height:115px;margin-left:-50px;margin-top:-57px;padding:10px 8px}
-  .wheel-icon{font-size:1.8rem}
+  .wheel-icon img{width:100%;height:100%}
   .wheel-label{font-size:10px}
   .wheel-sub{font-size:15px}
+  .catstrip{padding:32px 1rem 0}
+  .catstrip-title{font-size:1.4rem}
   .catstrip-scroll{grid-template-columns:1fr 1fr 1fr;gap:10px}
   .catstrip-card{padding:20px 10px}
+  .specials-banner{padding:24px 1rem 0}
+  .specials-inner{padding:20px}
+  .specials-title{font-size:1.2rem}
+  .specials-sub{font-size:13px;margin-bottom:14px}
+  .specials-item{min-width:180px;padding:10px}
+  .specials-item-img{width:40px;height:40px}
+  .specials-item-price{font-size:16px}
+  .season-strip{padding:20px 1rem 0}
+  .season-inner{padding:20px}
   main{padding:24px 1rem 2rem}
+  .section-title{font-size:1.3rem}
   .pg{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
   .padd{font-size:12px;height:34px}
-  .footer-inner{grid-template-columns:1fr;gap:24px;text-align:center}
+  .footer-inner{grid-template-columns:1fr !important;gap:24px;text-align:center}
   .footer-brand p{margin:0 auto}
-  .page-header{padding:100px 1rem 30px}
+  .footer-brand div{justify-content:center}
+  .page-header{padding:90px 1rem 24px}
+  .page-header h2{font-size:1.8rem}
+  .checkout{padding:90px 1rem 60px}
+  .checkout h2{font-size:1.4rem}
+  .checkout-phone{font-size:1rem;padding:14px 24px}
+  .about{padding:90px 1rem 60px}
+  .about-hero h2{font-size:1.8rem}
+  .about-hero p{font-size:15px}
+  .contact{padding:90px 1rem 60px}
+  .contact-hero h2{font-size:1.8rem}
+  .contact-map{height:260px}
 }
+
+/* Small phones */
 @media(max-width:480px){
+  .hero{padding:72px 1rem 24px}
+  .hero h2{font-size:1.7rem}
+  .hero-inner{gap:24px}
+  .hero-actions{flex-direction:column;align-items:stretch}
+  .hero-btn{text-align:center}
   .pg{grid-template-columns:repeat(2,1fr);gap:8px}
   .pc{border-radius:14px}
   .pf{padding:10px 12px 14px}
@@ -310,17 +519,68 @@ footer::after{content:'';position:absolute;width:500px;height:500px;border-radiu
   .pp{font-size:15px}
   .wheel-scene{max-width:240px}
   .wheel-card{width:80px;height:95px;margin-left:-40px;margin-top:-47px;padding:8px 6px}
-  .wheel-icon{font-size:1.5rem}
   .wheel-label{font-size:9px}
   .wheel-sub{font-size:13px}
   .catstrip-scroll{gap:8px}
   .catstrip-card{padding:16px 8px}
   .catstrip-icon{font-size:1.8rem}
-  .catstrip-name{font-size:13px}
+  .catstrip-name{font-size:12px}
+  .catstrip-count{font-size:10px}
+  .specials-item{min-width:160px}
+  .season-chip{padding:4px 10px;font-size:11px}
   .pagination{gap:4px}
   .page-btn{min-width:36px;height:36px;font-size:13px}
+  .about-grid{grid-template-columns:1fr}
+  .about-card{padding:24px}
+  .about-story{padding:24px}
+  .about-cta{padding:28px 20px}
+  .contact-grid{grid-template-columns:1fr}
+  .contact-card{padding:20px}
+  .contact-phone-btn{font-size:1rem;padding:14px 24px}
+  .contact-map{height:220px}
+  .checkout-cta{padding:24px 16px}
+  footer{padding:48px 1rem 32px}
+  footer::before{height:48px;top:-24px}
+}
+
+/* Very small phones */
+@media(max-width:360px){
+  .logo-img{width:32px;height:32px}
+  .logo h1{font-size:.9rem}
+  .hero h2{font-size:1.5rem}
+  .pg{grid-template-columns:repeat(2,1fr);gap:6px}
+  .pf{padding:8px 10px 12px}
+  .pn{font-size:11px}
+  .pp{font-size:14px}
+  .padd{height:32px;font-size:11px;border-radius:8px}
+  .catstrip-scroll{grid-template-columns:1fr 1fr}
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "GroceryStore",
+  "name": "Crisp on Creek",
+  "description": "Fresh fruit, vegetables, deli, and grocery store in Mt Gravatt East.",
+  "url": "https://crisponcreek.com.au",
+  "telephone": "+61734930600",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "1164 Cavendish Rd",
+    "addressLocality": "Mt Gravatt East",
+    "addressRegion": "QLD",
+    "postalCode": "4122",
+    "addressCountry": "AU"
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "06:00",
+    "closes": "19:00"
+  },
+  "priceRange": "$"
+}
+</script>
 </head>
 <body class="has-sidebar">
 
@@ -329,12 +589,21 @@ footer::after{content:'';position:absolute;width:500px;height:500px;border-radiu
     <button class="hamburger" id="sidebarToggle" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
+    <a class="logo" href="#/" onclick="return false">
+      <img src="logo.png" alt="Crisp on Creek" class="logo-img">
+      <div>
+        <h1>Crisp on Creek</h1>
+        <div class="logo-t">Fresh Produce & Groceries</div>
+      </div>
+    </a>
     <nav class="nav-links" id="navLinks"></nav>
     <div class="nav-sep"></div>
     <div class="sb">
       <svg class="si-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" id="si" placeholder="Search products..." autocomplete="off">
+      <div class="search-dropdown" id="searchDropdown"></div>
     </div>
+    <div class="store-status" id="storeStatus"><span class="store-status-dot"></span><span id="storeStatusText">Open</span></div>
     <a class="nav-icon-btn" href="tel:0734930600" title="Call us">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
     </a>
@@ -368,21 +637,47 @@ footer::after{content:'';position:absolute;width:500px;height:500px;border-radiu
 <div id="app"></div>
 
 <footer>
-  <div class="footer-inner">
+  <div class="footer-inner" style="grid-template-columns:1.5fr 1fr 1fr 1fr">
     <div class="footer-brand">
       <h4>Crisp on Creek</h4>
-      <p>Your neighbourhood fruit shop and grocer. Fresh produce, quality groceries, and everything in between.</p>
+      <p>Your neighbourhood fruit shop and grocer. Fresh produce, quality deli, and everyday groceries — handpicked daily.</p>
+      <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap">
+        <a href="tel:0734930600" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#fff;text-decoration:none;font-size:14px;font-weight:600;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.2)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          07 3493 0600
+        </a>
+        <a href="https://www.instagram.com/crisponcreek2025/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;padding:10px 20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);border-radius:10px;color:#fff;text-decoration:none;font-size:14px;font-weight:600;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.2)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          Instagram
+        </a>
+      </div>
     </div>
     <div class="footer-col">
-      <h5>Visit us</h5>
-      <p>1164 Cavendish Rd, Mt Gravatt<br>Open 6am-7pm Daily</p>
+      <h5>Opening Hours</h5>
+      <p>Monday – Sunday<br><strong style="color:#fff;opacity:1;font-size:16px">6:00am – 7:00pm</strong><br>Open every day</p>
     </div>
     <div class="footer-col">
-      <h5>Information</h5>
-      <p>Prices subject to change<br>Updated 20 April 2026</p>
+      <h5>Quick Links</h5>
+      <p><a href="#/" style="color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">Best Sellers</a><br>
+      <a href="#/fruit-veg" style="color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">Fruit & Veg</a><br>
+      <a href="#/deli" style="color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">Deli</a><br>
+      <a href="#/grocery" style="color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">Grocery</a><br>
+      <a href="#/about" style="color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">About Us</a><br>
+      <a href="#/contact" style="color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">Contact</a></p>
+    </div>
+    <div class="footer-col">
+      <h5>Find Us</h5>
+      <p>1164 Cavendish Rd<br>Mt Gravatt East QLD 4122</p>
+      <a href="https://maps.google.com/?q=1164+Cavendish+Rd+Mt+Gravatt+East+QLD+4122" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;padding:8px 16px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.12);border-radius:8px;color:#fff;text-decoration:none;font-size:12px;font-weight:500;transition:all .2s" onmouseover="this.style.background='rgba(255,255,255,.2)'" onmouseout="this.style.background='rgba(255,255,255,.1)'">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Get Directions
+      </a>
+      <h5 style="margin-top:16px">Legal</h5>
+      <p><a href="#/privacy" style="color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">Privacy Policy</a><br>
+      <a href="#/terms" style="color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">Terms & Conditions</a></p>
     </div>
   </div>
-  <div class="footer-bottom">Crisp on Creek &copy; 2026</div>
+  <div class="footer-bottom">GANESH IND PTY LTD &nbsp;·&nbsp; ABN 57 685 923 077 &nbsp;·&nbsp; All prices in AUD &nbsp;·&nbsp; Crisp on Creek &copy; 2026</div>
 </footer>
 
 <button class="st" id="st" onclick="window.scrollTo({top:0,behavior:'smooth'})">&#8593;</button>
@@ -408,7 +703,7 @@ const ProductAPI = {
   _isHiddenEgg(p) {
     if (this._hiddenPcodes.has(String(p.pcode))) return true;
     const n = p.name.toUpperCase();
-    if (!/EGG/.test(n) || /EGGPLANT|PEGGONI|PAPPARDELLE|FETTUC|RELISH|TOMATO/.test(n)) return false;
+    if (!/EGG/.test(n) || /EGGPLANT|PEGGONI|PAPPARDELLE|FETTUC|LINGUINE|RELISH|TOMATO|LEGGING/.test(n)) return false;
     return !/BIG BOY/i.test(n);
   },
 
@@ -686,6 +981,10 @@ const ROUTES = [
   { path: '/deli',         name: 'Deli',          category: 'Deli' },
   { path: '/grocery',      name: 'Grocery',       category: 'Grocery' },
 ];
+const INFO_ROUTES = [
+  { path: '/about',   name: 'About Us' },
+  { path: '/contact', name: 'Contact' },
+];
 
 const SUB_CAT_ICONS = {
   'Fruit':'🍎','Vegetables':'🥦','Fruit Packs':'🧺','Veg Packs':'🥗','Fresh Herbs':'🌿',
@@ -695,10 +994,28 @@ const SUB_CAT_ICONS = {
   'Coffee':'☕','Meat':'🥩','Fruit & Veg':'🥬','Best Sellers':'⭐'
 };
 const SUB_CAT_PHOTOS = {
+  'Fruit':'crisp_on_creek_fruit_veg_images/Apple_Pink_Lady.jpg',
   'Vegetables':'crisp_on_creek_fruit_veg_images/Broccoli.jpg',
+  'Fruit Packs':'crisp_on_creek_fruit_veg_images/Apples_Green_Bag.jpg',
+  'Veg Packs':'crisp_on_creek_fruit_veg_images/Carrot_Bag.jpg',
   'Fresh Herbs':'crisp_on_creek_fruit_veg_images/Coriander_Fresh_Large_Bunch.jpg',
+  'Bread & Bakery':'crisp_on_creek_images/EUSTRALIS_CROISSANT_EA.png',
+  'Dairy':'crisp_on_creek_deli_images/Norco_Fresh_Milk.jpg',
+  'Eggs':'crisp_on_creek_deli_images/Big_Boys_Organic_Eggs.jpg',
   'Deli':'crisp_on_creek_deli_images/Casalingo_Prosciutto.jpg',
-  'Dairy':'crisp_on_creek_deli_images/Norco_Fresh_Milk.jpg'
+  'Meat':'crisp_on_creek_deli_images/Gotzinger_Kransky_400G.jpg',
+  'Grocery':'crisp_on_creek_images/Beerenberg_Tomato_Chutney.jpg',
+  'Confectionery':'crisp_on_creek_images/Cadbury_Cherry_Ripe_Bar.jpg',
+  'Dried Fruit & Nuts':'crisp_on_creek_images/AEGEAN_FRUIT_AND_NUT_450_GR.png',
+  'Nuts & Snacks':'crisp_on_creek_images/Cashew_Macadamia_Mix.jpg',
+  'Drinks':'crisp_on_creek_images/Bundaberg_Blood_Orange_Sparkling_Drink_Bottle.jpg',
+  'Fresh Juice':'crisp_on_creek_images/Impressed_Orange_Juice_With_Pulp.jpg',
+  'Coffee':'crisp_on_creek_images/Fresh_Press_Cold_Drip_Coffee.jpg',
+  'Freezer':'crisp_on_creek_images/BYRON_BAY_PIZZA_MARGHERITA_GF.png',
+  'Flowers':'crisp_on_creek_fruit_veg_images/Rosemary_Bunch.jpg',
+  'Cards & Ice Cream':'crisp_on_creek_images/Bubble_O_Bill_Streets_Ice_Cream_Chocolate_And_Caramel_And_Strawberry.jpg',
+  'Newsagent':'crisp_on_creek_images/Nescafe_Gld_Cof_Original_100G.jpg',
+  'Best Sellers':'crisp_on_creek_fruit_veg_images/Bananas_Cavendish_.jpg'
 };
 function catIcon(cat, size) {
   const photo = SUB_CAT_PHOTOS[cat];
@@ -725,9 +1042,9 @@ async function loadSubCategories() {
 function buildSidebarHTML() {
   const subOrder = ['Fruit','Vegetables','Fruit Packs','Veg Packs','Fresh Herbs','Bread & Bakery','Dairy','Eggs','Deli','Meat','Grocery','Confectionery','Dried Fruit & Nuts','Nuts & Snacks','Drinks','Fresh Juice','Coffee','Freezer','Flowers','Newsagent','Cards & Ice Cream'];
 
-  let html = '<div class="sidebar-brand"><a href="#/" class="sidebar-logo"><img src="logo.png" alt="Crisp on Creek"><span>Crisp on Creek</span><small>Fresh Produce &amp; Groceries</small></a></div><div class="sidebar-header"><div class="sidebar-title">Categories</div><button class="sidebar-close" id="sidebarClose">&times;</button></div><ul class="sidebar-list">';
+  let html = '<div class="sidebar-brand"><a href="#/" class="sidebar-brand-link"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.9C15.5 4.9 17 3.5 19 2c1 2 2 3.5 0 9.1A7 7 0 0 1 11 20z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg><div><div class="sidebar-brand-title">Categories</div><div class="sidebar-brand-sub">Browse our store</div></div></a></div><div class="sidebar-header"><div class="sidebar-title">Categories</div><button class="sidebar-close" id="sidebarClose">&times;</button></div><ul class="sidebar-list">';
   html += `<li class="sidebar-item"><button class="sidebar-link${currentRoute === '/' ? ' active' : ''}" data-path="/">
-    <span class="sidebar-icon">${SUB_CAT_ICONS['Best Sellers']}</span>Best Sellers</button></li>`;
+    <span class="sidebar-icon">${catIcon('Best Sellers', '1.4rem')}</span>Best Sellers</button></li>`;
   html += '<li><div class="sidebar-divider"></div></li>';
 
   for (const cat of subOrder) {
@@ -740,6 +1057,12 @@ function buildSidebarHTML() {
     html += `<li class="sidebar-item"><button class="sidebar-link${currentRoute === path ? ' active' : ''}" data-path="${path}" data-cat="${cat}">
       <span class="sidebar-icon">${icon}</span>${cat}<span class="sidebar-count">${count}</span></button></li>`;
   }
+
+  html += '<li><div class="sidebar-divider"></div></li>';
+  html += `<li class="sidebar-item"><button class="sidebar-link${currentRoute === '/about' ? ' active' : ''}" data-path="/about">
+    <span class="sidebar-icon">ℹ️</span>About Us</button></li>`;
+  html += `<li class="sidebar-item"><button class="sidebar-link${currentRoute === '/contact' ? ' active' : ''}" data-path="/contact">
+    <span class="sidebar-icon">📍</span>Contact</button></li>`;
 
   html += '</ul>';
   return html;
@@ -792,12 +1115,13 @@ window.goToPage = function(page) {
 
 function updateNav() {
   const nav = document.getElementById('navLinks');
-  nav.innerHTML = ROUTES.map(r =>
+  const allNav = [...ROUTES, ...INFO_ROUTES];
+  nav.innerHTML = allNav.map(r =>
     `<a class="nav-link ${currentRoute === r.path ? 'active' : ''}" href="#${r.path}" onclick="return false">${r.name}</a>`
   ).join('');
   nav.querySelectorAll('.nav-link').forEach((el, i) => {
     el.addEventListener('click', () => {
-      navigate(ROUTES[i].path, 1, '');
+      navigate(allNav[i].path, 1, '');
       document.getElementById('si').value = '';
     });
   });
@@ -852,8 +1176,8 @@ async function renderHome(page, search) {
           <div class="wheel-scene">
             <div class="wheel" id="heroWheel">
               <div class="wheel-card"><div class="wheel-icon"><img src="crisp_on_creek_fruit_veg_images/Bananas_Cavendish_.jpg" alt="Fresh Fruit"></div><div class="wheel-label">Fresh Fruit</div><div class="wheel-sub">Daily</div></div>
-              <div class="wheel-card"><div class="wheel-icon"><img src="crisp_on_creek_fruit_veg_images/Avocado_Large_Hass.jpg" alt="Vegetables"></div><div class="wheel-label">Vegetables</div><div class="wheel-sub">Local</div></div>
-              <div class="wheel-card"><div class="wheel-icon"><img src="crisp_on_creek_deli_images/Meredith_Dairy_Marinated_Goat_Cheese.jpg" alt="Deli & Dairy"></div><div class="wheel-label">Deli & Dairy</div><div class="wheel-sub">Premium</div></div>
+              <div class="wheel-card"><div class="wheel-icon"><img src="crisp_on_creek_fruit_veg_images/Potatoes_Large_Sweet_Gold.jpg" alt="Vegetables"></div><div class="wheel-label">Vegetables</div><div class="wheel-sub">Local</div></div>
+              <div class="wheel-card"><div class="wheel-icon"><img src="crisp_on_creek_deli_images/Casalingo_Prosciutto.jpg" alt="Deli & Dairy"></div><div class="wheel-label">Deli & Dairy</div><div class="wheel-sub">Premium</div></div>
               <div class="wheel-card"><div class="wheel-icon"><img src="crisp_on_creek_images/Beerenberg_Tomato_Chutney.jpg" alt="Grocery"></div><div class="wheel-label">Grocery</div><div class="wheel-sub">${all.length.toLocaleString()}+</div></div>
               <div class="wheel-card"><div class="wheel-icon"><img src="crisp_on_creek_fruit_veg_images/Coriander_Fresh_Large_Bunch.jpg" alt="Fresh Herbs"></div><div class="wheel-label">Fresh Herbs</div><div class="wheel-sub">Organic</div></div>
             </div>
@@ -875,8 +1199,44 @@ async function renderHome(page, search) {
       </div>
     </section>` : '';
 
+  let specialsHTML = '';
+  let seasonHTML = '';
+  if (page === 1) {
+    const specials = await getSpecialsItems();
+    if (specials.length) {
+      specialsHTML = `<section class="specials-banner"><div class="specials-inner">
+        <div class="specials-tag">Popular Right Now</div>
+        <div class="specials-title">Top Picks This Week</div>
+        <div class="specials-sub">Handpicked favourites flying off our shelves — grab them before they're gone.</div>
+        <div class="specials-items">${specials.map(p => {
+          const safeName = cleanName(p.name).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+          const safeImg = (p.img || '').replace(/'/g, "\\'");
+          const unit = getUnit(p.name);
+          return `<div class="specials-item" onclick="addToCart('${p.pcode}','${safeName}',${p.price},'${unit}','${safeImg}','${p.category}')">
+            <div class="specials-item-img">${p.img ? `<img src="${p.img}" alt="" loading="lazy">` : ''}</div>
+            <div class="specials-item-info">
+              <div class="specials-item-name">${cleanName(p.name)}</div>
+              <div class="specials-item-price">$${p.price.toFixed(2)}<span class="specials-item-unit"> ${unit}</span></div>
+            </div>
+          </div>`;
+        }).join('')}</div>
+      </div></section>`;
+    }
+    const season = getSeasonalProduce();
+    seasonHTML = `<section class="season-strip"><div class="season-inner">
+      <div class="season-icon">${season.icon}</div>
+      <div class="season-text">
+        <h3>What's In Season — ${season.label}</h3>
+        <p>These are at their peak right now. The freshest, tastiest picks of the season.</p>
+      </div>
+      <div class="season-items">${season.items.map(i => `<span class="season-chip">${i.emoji} ${i.name}</span>`).join('')}</div>
+    </div></section>`;
+  }
+
   app.innerHTML = `
     ${heroHTML}
+    ${specialsHTML}
+    ${seasonHTML}
     <div class="page-layout${page === 1 ? ' no-pad' : ''}">
       <main>
         <div class="section-title">Best Sellers${page > 1 ? ' — Page ' + page : ''}</div>
@@ -952,7 +1312,11 @@ async function renderSubCategory(catName, page, search) {
       rank: match ? match.rank : 9999,
       sales: match ? match.sales : 0
     };
-  }).filter(p => catName !== 'Eggs' || /big boy/i.test(p.name));
+  }).filter(p => {
+    const n = p.name.toUpperCase();
+    if (!/EGG/.test(n) || /EGGPLANT|PEGGONI|PAPPARDELLE|FETTUC|LINGUINE|RELISH|TOMATO|LEGGING/.test(n)) return true;
+    return /BIG BOY/i.test(n);
+  });
 
   if (search) {
     const q = search.toLowerCase();
@@ -1040,6 +1404,308 @@ function renderCheckout() {
 }
 
 /* ================================================================
+   STORE STATUS (Open/Closed)
+   ================================================================ */
+function updateStoreStatus() {
+  const el = document.getElementById('storeStatus');
+  const txt = document.getElementById('storeStatusText');
+  if (!el || !txt) return;
+  const now = new Date();
+  const h = now.getHours(), m = now.getMinutes();
+  const mins = h * 60 + m;
+  const isOpen = mins >= 360 && mins < 1140; // 6am=360, 7pm=1140
+  el.classList.toggle('open', isOpen);
+  el.classList.toggle('closed', !isOpen);
+  if (isOpen) {
+    const closeMin = 1140 - mins;
+    if (closeMin <= 60) txt.textContent = `Closes in ${closeMin}m`;
+    else txt.textContent = 'Open Now';
+  } else {
+    if (mins < 360) {
+      const openMin = 360 - mins;
+      if (openMin <= 60) txt.textContent = `Opens in ${openMin}m`;
+      else txt.textContent = 'Closed';
+    } else {
+      txt.textContent = 'Closed';
+    }
+  }
+}
+
+/* ================================================================
+   SEASONAL & SPECIALS DATA
+   ================================================================ */
+function getSeasonalProduce() {
+  const month = new Date().getMonth();
+  const seasons = {
+    summer: { months: [11,0,1], icon: '☀️', label: 'Summer', items: [
+      {name:'Watermelon', emoji:'🍉'},{name:'Mango', emoji:'🥭'},{name:'Cherries', emoji:'🍒'},{name:'Nectarines', emoji:'🍑'},{name:'Blueberries', emoji:'🫐'}
+    ]},
+    autumn: { months: [2,3,4], icon: '🍂', label: 'Autumn', items: [
+      {name:'Apples', emoji:'🍎'},{name:'Pears', emoji:'🍐'},{name:'Figs', emoji:'🟤'},{name:'Persimmons', emoji:'🍊'},{name:'Pomegranate', emoji:'❤️'}
+    ]},
+    winter: { months: [5,6,7], icon: '❄️', label: 'Winter', items: [
+      {name:'Citrus', emoji:'🍊'},{name:'Avocado', emoji:'🥑'},{name:'Broccoli', emoji:'🥦'},{name:'Cauliflower', emoji:'🤍'},{name:'Kiwi', emoji:'🥝'}
+    ]},
+    spring: { months: [8,9,10], icon: '🌸', label: 'Spring', items: [
+      {name:'Strawberries', emoji:'🍓'},{name:'Asparagus', emoji:'🌿'},{name:'Peas', emoji:'🟢'},{name:'Cherries', emoji:'🍒'},{name:'Stone Fruit', emoji:'🍑'}
+    ]}
+  };
+  for (const s of Object.values(seasons)) {
+    if (s.months.includes(month)) return s;
+  }
+  return seasons.summer;
+}
+
+async function getSpecialsItems() {
+  const all = await ProductAPI.getBestSellers(100);
+  const withImg = all.filter(p => p.img);
+  const shuffled = withImg.sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, 8);
+}
+
+/* ================================================================
+   ABOUT PAGE
+   ================================================================ */
+function renderAbout() {
+  const app = document.getElementById('app');
+  app.innerHTML = `<div class="about">
+    <div class="about-hero">
+      <h2>About Crisp on Creek</h2>
+      <p>We're a family-run fruit shop and grocer on Cavendish Road, proudly serving the Mt Gravatt community with the freshest produce and quality groceries every single day.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-card anim">
+        <div class="about-card-icon">🌿</div>
+        <h3>Fresh Every Day</h3>
+        <p>Our produce arrives fresh daily from local growers and the Brisbane Markets. We handpick the best quality fruit, vegetables, and herbs so you don't have to.</p>
+      </div>
+      <div class="about-card anim">
+        <div class="about-card-icon">🏪</div>
+        <h3>Your Local Grocer</h3>
+        <p>More than just a fruit shop — we stock a full range of grocery essentials, artisan deli items, dairy, bakery goods, and specialty products from around the world.</p>
+      </div>
+      <div class="about-card anim">
+        <div class="about-card-icon">💰</div>
+        <h3>Honest Prices</h3>
+        <p>We believe quality produce shouldn't cost a fortune. Our direct relationships with growers and suppliers mean better prices passed on to you.</p>
+      </div>
+      <div class="about-card anim">
+        <div class="about-card-icon">❤️</div>
+        <h3>Community First</h3>
+        <p>We know our regulars by name. Whether you need help choosing the perfect avocado or want recipe ideas, our friendly team is always happy to help.</p>
+      </div>
+    </div>
+    <div class="about-story anim">
+      <h3>What You'll Find In Store</h3>
+      <p>Step inside and you'll find an abundant display of seasonal fruits and vegetables — from everyday staples like bananas and tomatoes to specialty items like dragon fruit and fresh figs.</p>
+      <p>Our deli counter features premium cheeses, cured meats, marinated olives, and fresh dips made locally. We also carry a wide selection of grocery items including artisan pasta, imported sauces, specialty oils, fresh bread from local bakeries, and much more.</p>
+      <p>With over 2,900 products in store and new items arriving regularly, there's always something to discover at Crisp on Creek.</p>
+    </div>
+    <div class="about-cta anim">
+      <h3>Come Say Hello</h3>
+      <p>We're open 7 days a week, 6am to 7pm. Pop in on your way to work, during your lunch break, or on your weekend shop.</p>
+      <a href="#/contact" class="about-cta-btn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Visit Us &amp; Get Directions
+      </a>
+    </div>
+  </div>`;
+  observeAnims();
+}
+
+/* ================================================================
+   CONTACT PAGE
+   ================================================================ */
+function renderContact() {
+  const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const today = days[new Date().getDay()];
+  const hoursRows = days.slice(1).concat(days.slice(0,1)).map(d =>
+    `<tr class="${d === today ? 'today' : ''}"><td>${d}${d === today ? ' (Today)' : ''}</td><td>6:00am – 7:00pm</td></tr>`
+  ).join('');
+
+  const app = document.getElementById('app');
+  app.innerHTML = `<div class="contact">
+    <div class="contact-hero">
+      <h2>Visit Us</h2>
+      <p>We'd love to see you in store. Here's how to find us and when we're open.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card anim">
+        <div class="contact-card-icon">📍</div>
+        <div>
+          <h3>Address</h3>
+          <p>1164 Cavendish Rd<br>Mt Gravatt East QLD 4122</p>
+        </div>
+      </div>
+      <div class="contact-card anim">
+        <div class="contact-card-icon">📞</div>
+        <div>
+          <h3>Phone</h3>
+          <p><a href="tel:0734930600">07 3493 0600</a><br>Call to place an order</p>
+        </div>
+      </div>
+      <div class="contact-card anim">
+        <div class="contact-card-icon">🕐</div>
+        <div>
+          <h3>Hours</h3>
+          <p>Open every day<br><strong>6:00am – 7:00pm</strong></p>
+        </div>
+      </div>
+      <div class="contact-card anim">
+        <div class="contact-card-icon">🅿️</div>
+        <div>
+          <h3>Parking</h3>
+          <p>Free parking available<br>right out front</p>
+        </div>
+      </div>
+    </div>
+    <div class="contact-map anim">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3537.6!2d153.0845!3d-27.5505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6b914115cf04a6c1%3A0x5b6fc4a8e0cf2c0!2s1164+Cavendish+Rd%2C+Mt+Gravatt+East+QLD+4122!5e0!3m2!1sen!2sau!4v1714100000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <div class="contact-hours anim">
+      <h3>🕐 Opening Hours</h3>
+      <table class="hours-table">
+        ${hoursRows}
+      </table>
+    </div>
+    <div class="contact-phone-cta anim">
+      <h3>Ready to Order?</h3>
+      <p>Give us a call and we'll have your order ready for pickup.</p>
+      <a href="tel:0734930600" class="contact-phone-btn">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        07 3493 0600
+      </a>
+    </div>
+  </div>`;
+  observeAnims();
+}
+
+/* ================================================================
+   PRIVACY POLICY
+   ================================================================ */
+function renderPrivacy() {
+  const app = document.getElementById('app');
+  app.innerHTML = `<div class="legal">
+    <h2>Privacy Policy</h2>
+    <p class="legal-sub">GANESH IND PTY LTD (ABN 57 685 923 077) trading as Crisp on Creek</p>
+    <div class="legal-card">
+      <p>At GANESH IND PTY LTD trading as Crisp on Creek, we respect our customers' right to the privacy of their personal information. We have policies and procedures to ensure that all personal information, no matter how or where it is obtained, is handled sensitively, securely, and in accordance with the Australian Privacy Principles.</p>
+
+      <h3>How is my personal information kept safe?</h3>
+      <p>All credit card and other data is encrypted between your computer and the store using 256-bit encryption. Card details are never stored in, or even enter, our servers.</p>
+
+      <h3>What personal information do we collect and store?</h3>
+      <p>So that we can provide services to you, we may ask for personal details such as your name, address, telephone number, or email address. Some examples of where we may need these details include home delivery of groceries, subscription to our mailing list, or in-store competitions.</p>
+      <p>Privacy law requires us to collect personal information about you only if it is reasonable and practical to do so. GANESH IND PTY LTD takes measures to ensure your personal information is protected from unauthorised access, loss, misuse, disclosure, or alteration. We also take measures to destroy personal information when it is no longer required.</p>
+      <p>Generally, you have no obligation to provide any information requested by us. If you choose to withhold requested information, however, we may not be able to provide you with the goods and services that depend on the collection of that information.</p>
+
+      <h3>How is your personal information used?</h3>
+      <p>The personal information that we ask for is generally used to provide goods or services to you. For example, for a credit card transaction we need your card number, and for a competition we need your contact details so we can contact you if you win.</p>
+      <p>We may also use your personal information to provide you with superior service, such as advising you of new products and services if you have subscribed to our mailing list. We do not send information to you other than for the main purpose for which we have collected your personal details.</p>
+      <p>We do not provide your details to other organisations for any purpose.</p>
+
+      <h3>Access to your personal information</h3>
+      <p>We will provide you with access to any of your personal information we hold (except in the limited circumstances recognised by privacy law). If you require access to your personal information, or need to update your information, please email us at <a href="mailto:ganeshind2025@gmail.com">ganeshind2025@gmail.com</a>.</p>
+
+      <h3>Contact</h3>
+      <p>GANESH IND PTY LTD<br>1164 Cavendish Rd, Mt Gravatt East QLD 4122<br>Phone: <a href="tel:0734930600">07 3493 0600</a><br>Email: <a href="mailto:ganeshind2025@gmail.com">ganeshind2025@gmail.com</a></p>
+    </div>
+    <a href="#/" class="legal-back">Back to Shopping</a>
+  </div>`;
+  window.scrollTo({ top: 0 });
+}
+
+/* ================================================================
+   TERMS & CONDITIONS
+   ================================================================ */
+function renderTerms() {
+  const app = document.getElementById('app');
+  app.innerHTML = `<div class="legal">
+    <h2>Terms & Conditions</h2>
+    <p class="legal-sub">GANESH IND PTY LTD (ABN 57 685 923 077) trading as Crisp on Creek</p>
+    <div class="legal-card">
+      <h3>1. General</h3>
+      <ol>
+        <li>This Crisp on Creek website is operated by GANESH IND PTY LTD (ABN 57 685 923 077), located at 1164 Cavendish Rd, Mt Gravatt East QLD 4122 ("us" or "we").</li>
+        <li>Please read these terms and conditions before accessing or using the Site. If you are under 18 years of age, you should only use this Site with the involvement of a parent or guardian.</li>
+        <li>Your access to and use of the Site, including any order of products through the Site, is subject to these terms and conditions.</li>
+      </ol>
+
+      <h3>2. Products and Pricing</h3>
+      <ol>
+        <li>All product prices are displayed in Australian Dollars (AUD) and include GST where applicable.</li>
+        <li>Prices for products change from time to time and we do not provide notice of these changes. Product prices on the Site reflect current in-store pricing at the time of display.</li>
+        <li>We reserve the right to correct any pricing errors on the Site.</li>
+        <li>Product images are for illustration purposes only. Actual products may vary slightly from images shown.</li>
+        <li>Product availability is subject to stock levels and seasonal availability.</li>
+      </ol>
+
+      <h3>3. Placing an Order</h3>
+      <ol>
+        <li>Orders may be placed through the Site or by calling us on <a href="tel:0734930600">07 3493 0600</a>.</li>
+        <li>Any order placed through this Site is an offer by you to purchase the products for the price shown at the time you place the order.</li>
+        <li>We reserve the right to accept or reject your order for any reason, including if the requested product is not available or if there is an error in the price or product description.</li>
+        <li>You agree to provide current, complete, and accurate details when placing an order.</li>
+      </ol>
+
+      <h3>4. Collection</h3>
+      <ol>
+        <li>Orders accepted through the Site or by phone are available for in-store collection at our premises: 1164 Cavendish Rd, Mt Gravatt East QLD 4122.</li>
+        <li>You or your representative may be asked to provide identification when collecting an order.</li>
+        <li>We will not allow collection of alcohol or tobacco products to any person under the age of 18 years.</li>
+      </ol>
+
+      <h3>5. Payment</h3>
+      <ol>
+        <li>We accept payment by Visa, MasterCard, and cash in store.</li>
+        <li>You must not pay, or attempt to pay, for products through any fraudulent or unlawful means.</li>
+      </ol>
+
+      <h3>6. Restricted Products</h3>
+      <ol>
+        <li>You acknowledge that it is against the law to sell or supply alcohol or tobacco products to, or obtain alcohol or tobacco products on behalf of, a person under the age of 18 years.</li>
+        <li>You warrant that you are not obtaining alcohol or tobacco on behalf of a person under the age of 18 years.</li>
+      </ol>
+
+      <h3>7. Returns</h3>
+      <ol>
+        <li>If you wish to return a product because it is defective, you may return it to our store with your receipt.</li>
+        <li>Our goods come with guarantees that cannot be excluded under Australian Consumer Law. You are entitled to a replacement or refund for a major failure and compensation for any other reasonably foreseeable loss or damage.</li>
+      </ol>
+
+      <h3>8. Intellectual Property</h3>
+      <ol>
+        <li>The copyright in the Site, including its software, design, text, graphics, and content, is owned by or licensed to us.</li>
+        <li>You must not modify, copy, reproduce, upload, post, transmit, sell, or distribute any material from this Site without our prior written consent.</li>
+      </ol>
+
+      <h3>9. Limitation of Liability</h3>
+      <ol>
+        <li>To the maximum extent permitted by law, GANESH IND PTY LTD excludes all liability for any loss or damage arising from or connected to the use of this Site.</li>
+        <li>Nothing in these terms excludes, restricts, or modifies rights and remedies you may have under Australian Consumer Law.</li>
+      </ol>
+
+      <h3>10. Privacy</h3>
+      <ol>
+        <li>Our <a href="#/privacy">Privacy Policy</a> forms part of these terms and conditions.</li>
+      </ol>
+
+      <h3>11. General</h3>
+      <ol>
+        <li>This agreement is governed by the laws of Queensland, Australia. Each party submits to the non-exclusive jurisdiction of the courts of Queensland.</li>
+        <li>We may change these terms and conditions at any time. Changes take effect when posted on the Site.</li>
+        <li>If any part of these terms is found to be void or unenforceable, it is severed and the remainder continues in full force.</li>
+      </ol>
+
+      <h3>Contact</h3>
+      <p>GANESH IND PTY LTD<br>1164 Cavendish Rd, Mt Gravatt East QLD 4122<br>Phone: <a href="tel:0734930600">07 3493 0600</a><br>Email: <a href="mailto:ganeshind2025@gmail.com">ganeshind2025@gmail.com</a></p>
+    </div>
+    <a href="#/" class="legal-back">Back to Shopping</a>
+  </div>`;
+  window.scrollTo({ top: 0 });
+}
+
+/* ================================================================
    WHEEL ANIMATION
    ================================================================ */
 function initWheel() {
@@ -1098,16 +1764,24 @@ async function handleRoute() {
 
   updateNav();
 
+  updateStoreStatus();
+
   // Handle checkout
   if (path === '/checkout') {
     renderCheckout();
+    updateGlobalSidebar();
     return;
   }
+
+  // Handle info pages
+  if (path === '/about') { renderAbout(); updateGlobalSidebar(); return; }
+  if (path === '/contact') { renderContact(); updateGlobalSidebar(); return; }
+  if (path === '/privacy') { renderPrivacy(); updateGlobalSidebar(); return; }
+  if (path === '/terms') { renderTerms(); updateGlobalSidebar(); return; }
 
   // Handle subcategory routes: /cat/slug
   if (path.startsWith('/cat/')) {
     const slug = path.replace('/cat/', '');
-    // Find matching category name from subCategoryCounts
     const catName = Object.keys(subCategoryCounts).find(c =>
       c.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '') === slug
     );
@@ -1137,18 +1811,108 @@ window.addEventListener('scroll', () => {
   document.getElementById('st').classList.toggle('v', window.scrollY > 500);
 }, { passive: true });
 
-// Search with debounce
+// Search with predictive dropdown
 let searchTimer;
-document.getElementById('si').addEventListener('input', e => {
+const siInput = document.getElementById('si');
+const searchDrop = document.getElementById('searchDropdown');
+
+function highlightMatch(text, query) {
+  if (!query) return text;
+  const idx = text.toLowerCase().indexOf(query.toLowerCase());
+  if (idx === -1) return text;
+  return text.slice(0, idx) + '<mark>' + text.slice(idx, idx + query.length) + '</mark>' + text.slice(idx + query.length);
+}
+
+function closeSearchDropdown() {
+  searchDrop.classList.remove('show');
+  searchDrop.innerHTML = '';
+}
+
+async function showSearchPredictions(query) {
+  if (!query || query.length < 2) { closeSearchDropdown(); return; }
+  const results = await ProductAPI.search(query);
+  if (!results.length) {
+    searchDrop.innerHTML = '<div class="sd-empty">No products found for "' + query.replace(/</g,'&lt;') + '"</div>';
+    searchDrop.classList.add('show');
+    return;
+  }
+  const shown = results.slice(0, 8);
+  const total = results.length;
+  let html = '<div class="sd-header">Products (' + total + ' found)</div>';
+  html += shown.map(p => {
+    const name = cleanName(p.name);
+    const safeName = name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+    const safeImg = (p.img || '').replace(/'/g, "\\'");
+    const unit = getUnit(p.name);
+    const c = CAT_COLORS[p.category] || ['#f5f4f0','#eeedea'];
+    const imgHtml = p.img
+      ? `<img src="${p.img}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display=''">`
+      : '';
+    const emojiStyle = p.img ? 'display:none' : '';
+    return `<div class="sd-item" data-pcode="${p.pcode}" data-name="${safeName}" data-price="${p.price}" data-unit="${unit}" data-img="${safeImg}" data-cat="${p.category}">
+      <div class="sd-img" style="background:linear-gradient(145deg,${c[0]},${c[1]})">
+        ${imgHtml}<span class="sd-emoji" style="${emojiStyle}">${getEmoji(p.name, p.category)}</span>
+      </div>
+      <div class="sd-info">
+        <div class="sd-name">${highlightMatch(name, query)}</div>
+        <div class="sd-cat">${p.category}</div>
+      </div>
+      <div class="sd-price">$${p.price.toFixed(2)}<span class="sd-unit">${unit}</span></div>
+      <button class="sd-add" title="Add to cart">+</button>
+    </div>`;
+  }).join('');
+  if (total > 8) {
+    html += `<div class="sd-footer" id="sdSeeAll">See all ${total} results</div>`;
+  }
+  searchDrop.innerHTML = html;
+  searchDrop.classList.add('show');
+
+  searchDrop.querySelectorAll('.sd-add').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const row = btn.closest('.sd-item');
+      addToCart(row.dataset.pcode, row.dataset.name, parseFloat(row.dataset.price), row.dataset.unit, row.dataset.img, row.dataset.cat);
+    });
+  });
+  searchDrop.querySelectorAll('.sd-item').forEach(row => {
+    row.addEventListener('click', () => {
+      addToCart(row.dataset.pcode, row.dataset.name, parseFloat(row.dataset.price), row.dataset.unit, row.dataset.img, row.dataset.cat);
+    });
+  });
+  const seeAll = document.getElementById('sdSeeAll');
+  if (seeAll) {
+    seeAll.addEventListener('click', () => {
+      closeSearchDropdown();
+      navigate('/', 1, query);
+    });
+  }
+}
+
+siInput.addEventListener('input', e => {
   clearTimeout(searchTimer);
-  searchTimer = setTimeout(() => {
-    const q = e.target.value.trim();
-    navigate('/', 1, q);
-  }, 300);
+  const q = e.target.value.trim();
+  searchTimer = setTimeout(() => showSearchPredictions(q), 150);
+});
+
+siInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    closeSearchDropdown();
+    const q = siInput.value.trim();
+    if (q) navigate('/', 1, q);
+  }
+  if (e.key === 'Escape') {
+    closeSearchDropdown();
+    siInput.blur();
+  }
+});
+
+document.addEventListener('click', e => {
+  if (!e.target.closest('.sb')) closeSearchDropdown();
 });
 
 // Logo click goes home
-document.querySelector('.sidebar-logo')?.addEventListener('click', (e) => {
+document.querySelector('.logo').addEventListener('click', (e) => {
   e.preventDefault();
   document.getElementById('si').value = '';
   navigate('/', 1, '');
@@ -1158,6 +1922,8 @@ document.querySelector('.sidebar-logo')?.addEventListener('click', (e) => {
 // Boot
 initSidebarEvents();
 updateCartUI();
+updateStoreStatus();
+setInterval(updateStoreStatus, 60000);
 (async () => {
   await loadSubCategories();
   if (!location.hash || location.hash === '#') location.hash = '#/';
