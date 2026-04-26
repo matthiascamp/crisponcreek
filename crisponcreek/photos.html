@@ -77,6 +77,7 @@ body{font-family:-apple-system,system-ui,'Segoe UI',sans-serif;background:var(--
 .search:focus{border-color:var(--green)}
 .filter-btn{padding:7px 12px;border:1px solid var(--border);border-radius:10px;background:var(--surface);font-size:.75rem;cursor:pointer;white-space:nowrap}
 .filter-btn.active{background:var(--forest);color:#fff;border-color:var(--forest)}
+.cat-select{padding:7px 10px;border:1px solid var(--border);border-radius:10px;background:var(--surface);font-size:.75rem;cursor:pointer;font-family:inherit;color:var(--text)}
 
 .section-header{padding:8px 16px;background:var(--lime);font-size:.8rem;font-weight:600;color:var(--forest);position:sticky;top:96px;z-index:80}
 
@@ -206,13 +207,13 @@ body{font-family:-apple-system,system-ui,'Segoe UI',sans-serif;background:var(--
 <div class="browse-section" id="browseSection">
   <div class="controls">
     <input class="search" type="search" placeholder="Search products..." id="searchInput">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="todo">Needs Photo</button>
+    <button class="filter-btn" data-filter="all">All</button>
+    <button class="filter-btn active" data-filter="todo">Needs Photo</button>
     <button class="filter-btn" data-filter="done">Captured</button>
     <button class="filter-btn" data-filter="hasImg">Already Has</button>
-    <button class="filter-btn" data-cat="Fruit & Veg">Fruit&Veg</button>
-    <button class="filter-btn" data-cat="Grocery">Grocery</button>
-    <button class="filter-btn" data-cat="Deli">Deli</button>
+    <select class="cat-select" id="catSelect">
+      <option value="">All Categories</option>
+    </select>
   </div>
   <div id="productList"></div>
 </div>
@@ -326,7 +327,7 @@ function resizeImage(file, maxDim) {
 
 let donePcodes = new Set();
 let recentCaptures = [];
-let currentFilter = 'all';
+let currentFilter = 'todo';
 let currentCat = null;
 let searchTerm = '';
 let overlayPcode = null;
@@ -536,7 +537,7 @@ function renderList() {
     filtered = filtered.filter(p => p.n.toLowerCase().includes(q) || p.p.includes(q) || (p.b && p.b.includes(q)));
   }
   if (currentCat) {
-    filtered = filtered.filter(p => p.c === currentCat);
+    filtered = filtered.filter(p => (p.sc || p.c) === currentCat || p.c === currentCat);
   }
   if (currentFilter === 'todo') {
     filtered = filtered.filter(p => !p.h && !donePcodes.has(p.p));
@@ -609,21 +610,28 @@ async function handleBrowsePhoto(e) {
 document.querySelectorAll('.filter-btn[data-filter]').forEach(btn => {
   btn.addEventListener('click', () => {
     currentFilter = btn.dataset.filter;
-    currentCat = null;
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     renderList();
   });
 });
-document.querySelectorAll('.filter-btn[data-cat]').forEach(btn => {
-  btn.addEventListener('click', () => {
-    currentCat = currentCat === btn.dataset.cat ? null : btn.dataset.cat;
-    currentFilter = 'all';
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    if (currentCat) btn.classList.add('active');
-    else document.querySelector('[data-filter="all"]').classList.add('active');
-    renderList();
-  });
+// Populate category dropdown
+const catSelect = document.getElementById('catSelect');
+const subCatOrder = ['Fruit','Vegetables','Fruit Packs','Veg Packs','Fresh Herbs','Bread & Bakery','Dairy','Eggs','Deli','Meat','Grocery','Confectionery','Dried Fruit & Nuts','Nuts & Snacks','Drinks','Fresh Juice','Coffee','Freezer','Flowers','Newsagent','Cards & Ice Cream'];
+const catCounts = {};
+PRODUCTS.forEach(p => { const c = p.sc || p.c; catCounts[c] = (catCounts[c] || 0) + 1; });
+subCatOrder.forEach(cat => {
+  if (catCounts[cat]) {
+    const opt = document.createElement('option');
+    opt.value = cat;
+    const needsCount = PRODUCTS.filter(p => (p.sc || p.c) === cat && !p.h).length;
+    opt.textContent = `${cat} (${needsCount} need photo)`;
+    catSelect.appendChild(opt);
+  }
+});
+catSelect.addEventListener('change', () => {
+  currentCat = catSelect.value || null;
+  renderList();
 });
 document.getElementById('searchInput').addEventListener('input', e => {
   searchTerm = e.target.value.trim();

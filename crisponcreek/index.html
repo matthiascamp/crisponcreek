@@ -116,10 +116,11 @@ header.scrolled{background:rgba(255,255,255,.85);box-shadow:0 8px 40px rgba(27,6
 .has-sidebar .hero,.has-sidebar .catstrip,.has-sidebar footer{margin-left:200px}
 .has-sidebar .page-layout{margin-left:200px;margin-right:24px;max-width:none}
 .has-sidebar header{left:224px;transform:none;width:calc(100% - 200px - 48px);max-width:none}
-.sidebar-brand{padding:4px 6px 14px;border-bottom:1px solid var(--border);margin-bottom:12px}
-.sidebar-logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.sidebar-logo img{border-radius:8px;object-fit:contain}
-.sidebar-logo span{font-family:'Playfair Display',Georgia,serif;font-size:.95rem;font-weight:700;color:var(--forest);line-height:1.2}
+.sidebar-brand{padding:4px 8px 16px;border-bottom:1px solid var(--border);margin-bottom:12px;text-align:center}
+.sidebar-logo{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none}
+.sidebar-logo img{border-radius:10px;object-fit:contain;width:80px;height:auto}
+.sidebar-logo span{font-family:'Playfair Display',Georgia,serif;font-size:.85rem;font-weight:700;color:var(--forest);line-height:1.2}
+.sidebar-logo small{font-size:.65rem;color:var(--textM);font-weight:500;letter-spacing:.05em;text-transform:uppercase}
 .sidebar-header{display:none}
 .sidebar-close{display:none}
 .sidebar-list{list-style:none}
@@ -332,13 +333,6 @@ footer::after{content:'';position:absolute;width:500px;height:500px;border-radiu
     <button class="hamburger" id="sidebarToggle" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
-    <a class="logo" href="#/" onclick="return false">
-      <img src="logo.png" alt="Crisp on Creek" class="logo-img">
-      <div>
-        <h1>Crisp on Creek</h1>
-        <div class="logo-t">Fresh Produce & Groceries</div>
-      </div>
-    </a>
     <nav class="nav-links" id="navLinks"></nav>
     <div class="sb">
       <svg class="si-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -731,7 +725,7 @@ async function loadSubCategories() {
 function buildSidebarHTML() {
   const subOrder = ['Fruit','Vegetables','Fruit Packs','Veg Packs','Fresh Herbs','Bread & Bakery','Dairy','Eggs','Deli','Meat','Grocery','Confectionery','Dried Fruit & Nuts','Nuts & Snacks','Drinks','Fresh Juice','Coffee','Freezer','Flowers','Newsagent','Cards & Ice Cream'];
 
-  let html = '<div class="sidebar-brand"><a href="#/" class="sidebar-logo"><img src="logo.png" alt="Crisp on Creek" width="44" height="32"><span>Crisp on Creek</span></a></div><div class="sidebar-header"><div class="sidebar-title">Categories</div><button class="sidebar-close" id="sidebarClose">&times;</button></div><ul class="sidebar-list">';
+  let html = '<div class="sidebar-brand"><a href="#/" class="sidebar-logo"><img src="logo.png" alt="Crisp on Creek"><span>Crisp on Creek</span><small>Fresh Produce &amp; Groceries</small></a></div><div class="sidebar-header"><div class="sidebar-title">Categories</div><button class="sidebar-close" id="sidebarClose">&times;</button></div><ul class="sidebar-list">';
   html += `<li class="sidebar-item"><button class="sidebar-link${currentRoute === '/' ? ' active' : ''}" data-path="/">
     <span class="sidebar-icon">${SUB_CAT_ICONS['Best Sellers']}</span>Best Sellers</button></li>`;
   html += '<li><div class="sidebar-divider"></div></li>';
