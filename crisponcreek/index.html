@@ -135,6 +135,67 @@ header.scrolled{background:rgba(255,255,255,.85);box-shadow:0 8px 40px rgba(27,6
 .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:205;transition:opacity .3s}
 .sidebar-overlay.show{display:block}
 
+/* -- Cart Icon in Header -- */
+.cart-btn{position:relative;width:42px;height:42px;border:none;background:var(--lime);border-radius:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.cart-btn:hover{background:var(--mint)}
+.cart-btn svg{width:20px;height:20px;stroke:var(--forest);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cart-badge{position:absolute;top:-4px;right:-4px;min-width:18px;height:18px;background:var(--pop);color:#fff;border-radius:9px;font-size:10px;font-weight:700;display:none;align-items:center;justify-content:center;padding:0 4px;font-family:inherit}
+.cart-badge.show{display:flex}
+
+/* -- Cart Drawer -- */
+.cart-drawer{position:fixed;top:0;right:-420px;bottom:0;width:400px;max-width:90vw;z-index:210;background:var(--surface);box-shadow:-4px 0 24px rgba(0,0,0,.12);transition:right .3s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column}
+.cart-drawer.open{right:0}
+.cart-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:205}
+.cart-overlay.show{display:block}
+.cart-header{display:flex;align-items:center;justify-content:space-between;padding:20px;border-bottom:1px solid var(--border)}
+.cart-header h2{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;font-weight:700;color:var(--forest)}
+.cart-close{width:36px;height:36px;border:none;background:var(--lime);border-radius:10px;font-size:18px;cursor:pointer;color:var(--forest);display:flex;align-items:center;justify-content:center}
+.cart-close:hover{background:var(--mint)}
+.cart-items{flex:1;overflow-y:auto;padding:12px 20px}
+.cart-empty{text-align:center;padding:60px 20px;color:var(--textM)}
+.cart-empty-icon{font-size:2.5rem;margin-bottom:12px;opacity:.4}
+.cart-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.cart-item-img{width:52px;height:52px;border-radius:10px;overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.cart-item-img img{width:100%;height:100%;object-fit:cover}
+.cart-item-img .ci-emoji{font-size:1.6rem;opacity:.5}
+.cart-item-info{flex:1;min-width:0}
+.cart-item-name{font-size:13px;font-weight:600;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cart-item-price{font-size:12px;color:var(--textS)}
+.cart-item-qty{display:flex;align-items:center;gap:6px}
+.qty-btn{width:28px;height:28px;border:1px solid var(--border);background:var(--surface);border-radius:8px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text);font-weight:600;transition:all .15s}
+.qty-btn:hover{background:var(--lime);border-color:var(--green)}
+.qty-val{font-size:14px;font-weight:700;min-width:20px;text-align:center}
+.cart-item-remove{border:none;background:none;color:var(--textM);cursor:pointer;font-size:16px;padding:4px;transition:color .15s}
+.cart-item-remove:hover{color:var(--pop)}
+.cart-footer{padding:16px 20px;border-top:1px solid var(--border);background:var(--bg)}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.cart-total-label{font-size:14px;font-weight:500;color:var(--textS)}
+.cart-total-price{font-size:1.3rem;font-weight:700;color:var(--forest);font-family:'Playfair Display',Georgia,serif}
+.cart-checkout-btn{width:100%;padding:14px;border:none;border-radius:12px;background:var(--forest);color:#fff;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
+.cart-checkout-btn:hover{background:var(--forestM);transform:translateY(-1px);box-shadow:0 4px 16px rgba(27,67,50,.2)}
+.cart-clear{width:100%;padding:10px;border:none;background:none;color:var(--textM);font-size:12px;cursor:pointer;font-family:inherit;margin-top:6px}
+.cart-clear:hover{color:var(--pop)}
+
+/* -- Checkout Page -- */
+.checkout{max-width:640px;margin:0 auto;padding:120px 2rem 80px}
+.checkout-icon{font-size:3rem;text-align:center;margin-bottom:12px}
+.checkout h2{font-family:'Playfair Display',Georgia,serif;font-size:1.8rem;font-weight:700;color:var(--forest);text-align:center;margin-bottom:24px}
+.checkout-summary{background:var(--surface);border-radius:var(--rL);border:1px solid var(--border);overflow:hidden;margin-bottom:24px}
+.checkout-row{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border);font-size:14px}
+.checkout-row:last-child{border:none}
+.checkout-row .cr-name{flex:1;font-weight:500}
+.checkout-row .cr-qty{color:var(--textM);font-size:12px;margin:0 12px}
+.checkout-row .cr-price{font-weight:700;color:var(--forest);white-space:nowrap}
+.checkout-total-row{display:flex;justify-content:space-between;padding:16px 20px;background:var(--lime);font-size:16px;font-weight:700;color:var(--forest)}
+.checkout-cta{background:var(--surface);border:2px solid var(--green);border-radius:var(--rL);padding:32px;text-align:center}
+.checkout-cta h3{font-family:'Playfair Display',Georgia,serif;font-size:1.2rem;color:var(--forest);margin-bottom:8px}
+.checkout-cta p{font-size:14px;color:var(--textS);margin-bottom:20px;line-height:1.6}
+.checkout-phone{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:var(--forest);color:#fff;border-radius:14px;font-size:1.2rem;font-weight:700;text-decoration:none;transition:all .2s;font-family:'Playfair Display',Georgia,serif;letter-spacing:.02em}
+.checkout-phone:hover{background:var(--pop);transform:translateY(-2px);box-shadow:0 8px 24px rgba(232,105,58,.25)}
+.checkout-phone svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.checkout-back{display:block;margin:20px auto 0;padding:12px 24px;border:1px solid var(--border);background:var(--surface);border-radius:12px;font-size:14px;color:var(--textS);cursor:pointer;font-family:inherit;transition:all .2s}
+.checkout-back:hover{border-color:var(--green);background:var(--lime)}
+
 /* -- Main -- */
 main{flex:1;min-width:0;padding:48px 2rem 3rem}
 .section-title{font-family:'Playfair Display',Georgia,serif;font-size:1.6rem;font-weight:700;color:var(--forest);margin-bottom:20px;display:flex;align-items:center;gap:12px}
@@ -266,8 +327,29 @@ footer::after{content:'';position:absolute;width:500px;height:500px;border-radiu
       <svg class="si-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       <input type="text" id="si" placeholder="Search products..." autocomplete="off">
     </div>
+    <button class="cart-btn" id="cartBtn" aria-label="Cart">
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <span class="cart-badge" id="cartBadge">0</span>
+    </button>
   </div>
 </header>
+
+<div class="cart-overlay" id="cartOverlay"></div>
+<div class="cart-drawer" id="cartDrawer">
+  <div class="cart-header">
+    <h2>Your Cart</h2>
+    <button class="cart-close" id="cartClose">&times;</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer" id="cartFooter" style="display:none">
+    <div class="cart-total">
+      <span class="cart-total-label">Estimated Total</span>
+      <span class="cart-total-price" id="cartTotal">$0.00</span>
+    </div>
+    <button class="cart-checkout-btn" id="cartCheckoutBtn">Proceed to Order</button>
+    <button class="cart-clear" id="cartClear">Clear cart</button>
+  </div>
+</div>
 
 <div id="app"></div>
 
@@ -405,13 +487,16 @@ function productCard(p) {
     ? `<img src="${p.img}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display=''">`
     : '';
   const emojiDisplay = hasImg ? 'display:none' : '';
+  const safeName = cleanName(p.name).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+  const safeImg = (p.img || '').replace(/'/g, "\\'");
+  const unit = getUnit(p.name);
   return `<div class="pc anim">
     <div class="pi" style="background:linear-gradient(145deg,${c[0]},${c[1]})">
       ${imgHtml}<span class="pe" style="${emojiDisplay}">${getEmoji(p.name, p.category)}</span>
     </div>
     <div class="pf">
       <div class="pn">${cleanName(p.name)}</div>
-      <div class="pm"><div><span class="pp">$${p.price.toFixed(2)}</span><span class="pu">${getUnit(p.name)}</span></div><button class="padd" onclick="addToast('${cleanName(p.name).replace(/'/g, "\\'")}')">+</button></div>
+      <div class="pm"><div><span class="pp">$${p.price.toFixed(2)}</span><span class="pu">${unit}</span></div><button class="padd" onclick="addToCart('${p.pcode}','${safeName}',${p.price},'${unit}','${safeImg}','${p.category}')">+</button></div>
     </div>
   </div>`;
 }
@@ -444,17 +529,129 @@ function paginationHTML(currentPage, totalPages) {
 }
 
 /* ================================================================
-   TOAST
+   CART (localStorage with 48hr expiry)
    ================================================================ */
+const CART_KEY = 'crisp_cart';
+const CART_TTL = 48 * 60 * 60 * 1000;
+
+function loadCart() {
+  try {
+    const raw = localStorage.getItem(CART_KEY);
+    if (!raw) return [];
+    const data = JSON.parse(raw);
+    if (Date.now() - data.ts > CART_TTL) { localStorage.removeItem(CART_KEY); return []; }
+    return data.items || [];
+  } catch { return []; }
+}
+
+function saveCart(items) {
+  localStorage.setItem(CART_KEY, JSON.stringify({ items, ts: Date.now() }));
+}
+
+let cart = loadCart();
+
+function addToCart(pcode, name, price, unit, img, cat) {
+  const existing = cart.find(i => i.pcode === pcode);
+  if (existing) { existing.qty++; }
+  else { cart.push({ pcode, name, price, unit, img, cat, qty: 1 }); }
+  saveCart(cart);
+  updateCartUI();
+  showCartToast(name);
+}
+
+function updateCartQty(pcode, delta) {
+  const item = cart.find(i => i.pcode === pcode);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(i => i.pcode !== pcode);
+  saveCart(cart);
+  updateCartUI();
+  renderCartItems();
+}
+
+function removeFromCart(pcode) {
+  cart = cart.filter(i => i.pcode !== pcode);
+  saveCart(cart);
+  updateCartUI();
+  renderCartItems();
+}
+
+function clearCart() {
+  cart = [];
+  localStorage.removeItem(CART_KEY);
+  updateCartUI();
+  renderCartItems();
+}
+
+function cartCount() { return cart.reduce((s, i) => s + i.qty, 0); }
+function cartTotal() { return cart.reduce((s, i) => s + i.price * i.qty, 0); }
+
+function updateCartUI() {
+  const badge = document.getElementById('cartBadge');
+  const count = cartCount();
+  badge.textContent = count;
+  badge.classList.toggle('show', count > 0);
+  const footer = document.getElementById('cartFooter');
+  if (footer) footer.style.display = count > 0 ? '' : 'none';
+  const totalEl = document.getElementById('cartTotal');
+  if (totalEl) totalEl.textContent = '$' + cartTotal().toFixed(2);
+}
+
+function renderCartItems() {
+  const container = document.getElementById('cartItems');
+  if (!cart.length) {
+    container.innerHTML = '<div class="cart-empty"><div class="cart-empty-icon">&#128722;</div><p>Your cart is empty</p></div>';
+    return;
+  }
+  container.innerHTML = cart.map(item => {
+    const imgHtml = item.img
+      ? `<img src="${item.img}" alt="" onerror="this.style.display='none';this.nextElementSibling.style.display=''">`
+      : '';
+    const emojiStyle = item.img ? 'display:none' : '';
+    return `<div class="cart-item" data-pcode="${item.pcode}">
+      <div class="cart-item-img" style="background:var(--lime)">
+        ${imgHtml}<span class="ci-emoji" style="${emojiStyle}">${getEmoji(item.name, item.cat)}</span>
+      </div>
+      <div class="cart-item-info">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">$${item.price.toFixed(2)}${item.unit ? ' ' + item.unit : ''}</div>
+      </div>
+      <div class="cart-item-qty">
+        <button class="qty-btn" onclick="updateCartQty('${item.pcode}',-1)">&minus;</button>
+        <span class="qty-val">${item.qty}</span>
+        <button class="qty-btn" onclick="updateCartQty('${item.pcode}',1)">+</button>
+      </div>
+      <button class="cart-item-remove" onclick="removeFromCart('${item.pcode}')">&times;</button>
+    </div>`;
+  }).join('');
+}
+
+function openCart() {
+  renderCartItems();
+  document.getElementById('cartDrawer').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('show');
+}
+function closeCart() {
+  document.getElementById('cartDrawer').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('show');
+}
+
 let toastTimer;
-function addToast(name) {
+function showCartToast(name) {
   let t = document.getElementById('toast');
   if (!t) { t = document.createElement('div'); t.id = 'toast'; t.className = 'toast'; document.body.appendChild(t); }
   clearTimeout(toastTimer);
-  t.textContent = 'Added ' + name;
+  t.textContent = 'Added ' + name + ' to cart';
   t.classList.add('show');
-  toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
 }
+
+// Cart event listeners
+document.getElementById('cartBtn').addEventListener('click', openCart);
+document.getElementById('cartClose').addEventListener('click', closeCart);
+document.getElementById('cartOverlay').addEventListener('click', closeCart);
+document.getElementById('cartClear').addEventListener('click', () => { if (confirm('Clear your entire cart?')) clearCart(); });
+document.getElementById('cartCheckoutBtn').addEventListener('click', () => { closeCart(); navigate('/checkout', 1, ''); });
 
 /* ================================================================
    ROUTER
@@ -754,6 +951,52 @@ function bindSidebarLinks() {
 }
 
 /* ================================================================
+   CHECKOUT
+   ================================================================ */
+function renderCheckout() {
+  const app = document.getElementById('app');
+  if (!cart.length) {
+    app.innerHTML = `<div class="checkout">
+      <div class="checkout-icon">&#128722;</div>
+      <h2>Your Cart is Empty</h2>
+      <p style="text-align:center;color:var(--textS)">Add some products and come back here to place your order.</p>
+      <button class="checkout-back" onclick="navigate('/',1,'')">Continue Shopping</button>
+    </div>`;
+    return;
+  }
+
+  const total = cartTotal();
+  const itemRows = cart.map(item =>
+    `<div class="checkout-row">
+      <span class="cr-name">${item.name}</span>
+      <span class="cr-qty">&times;${item.qty}</span>
+      <span class="cr-price">$${(item.price * item.qty).toFixed(2)}</span>
+    </div>`
+  ).join('');
+
+  app.innerHTML = `<div class="checkout">
+    <div class="checkout-icon">&#128722;</div>
+    <h2>Your Order</h2>
+    <div class="checkout-summary">
+      ${itemRows}
+      <div class="checkout-total-row">
+        <span>Estimated Total</span>
+        <span>$${total.toFixed(2)}</span>
+      </div>
+    </div>
+    <div class="checkout-cta">
+      <h3>Online ordering coming soon!</h3>
+      <p>To place this order, give us a call and we'll have it ready for you. Just read out the items or mention your order total — we'll take care of the rest.</p>
+      <a href="tel:0734930600" class="checkout-phone">
+        <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        07 3493 0600
+      </a>
+    </div>
+    <button class="checkout-back" onclick="navigate('/',1,'')">Continue Shopping</button>
+  </div>`;
+}
+
+/* ================================================================
    WHEEL ANIMATION
    ================================================================ */
 function initWheel() {
@@ -812,6 +1055,12 @@ async function handleRoute() {
 
   updateNav();
 
+  // Handle checkout
+  if (path === '/checkout') {
+    renderCheckout();
+    return;
+  }
+
   // Handle subcategory routes: /cat/slug
   if (path.startsWith('/cat/')) {
     const slug = path.replace('/cat/', '');
@@ -865,6 +1114,7 @@ document.querySelector('.logo').addEventListener('click', (e) => {
 
 // Boot
 initSidebarEvents();
+updateCartUI();
 (async () => {
   await loadSubCategories();
   if (!location.hash || location.hash === '#') location.hash = '#/';
