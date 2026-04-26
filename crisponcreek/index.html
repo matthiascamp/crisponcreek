@@ -1148,7 +1148,7 @@ document.getElementById('si').addEventListener('input', e => {
 });
 
 // Logo click goes home
-document.querySelector('.logo').addEventListener('click', (e) => {
+document.querySelector('.sidebar-logo')?.addEventListener('click', (e) => {
   e.preventDefault();
   document.getElementById('si').value = '';
   navigate('/', 1, '');
