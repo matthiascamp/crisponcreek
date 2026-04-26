@@ -391,7 +391,9 @@ const ProductAPI = {
   // Expected response: array of { name, price, pcode, category, rank, sales, img }
   _endpoint: 'top_products.json',
 
+  _hiddenPcodes: new Set(['27759','27732','27368','27750','27877','27740','27805','27873','27899','27729','27852','27854','27619']),
   _isHiddenEgg(p) {
+    if (this._hiddenPcodes.has(String(p.pcode))) return true;
     const n = p.name.toUpperCase();
     if (!/EGG/.test(n) || /EGGPLANT|PEGGONI|PAPPARDELLE|FETTUC|RELISH/.test(n)) return false;
     return !/BIG BOY/i.test(n);
@@ -918,7 +920,7 @@ async function renderSubCategory(catName, page, search) {
     img: '',
     rank: 0,
     sales: 0
-  })).filter(p => !ProductAPI._isHiddenEgg(p));
+  })).filter(p => catName !== 'Eggs' || /big boy/i.test(p.name));
 
   if (search) {
     const q = search.toLowerCase();
