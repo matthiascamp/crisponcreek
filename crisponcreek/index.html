@@ -469,6 +469,8 @@ const EMOJIS={watermelon:'🍉',melon:'🍈',banana:'🍌',apple:'🍎',pear:'�
 const SK=Object.keys(EMOJIS).sort((a,b)=>b.length-a.length);
 const CAT_ICONS={'Fruit & Veg':'🥬','Deli':'🧀','Grocery':'🛒'};
 const CAT_COLORS={'Fruit & Veg':['#e8f5e9','#c8e6c9'],'Deli':['#fff8e1','#ffecb3'],'Grocery':['#fce4ec','#f8bbd0']};
+const SUB_TO_PARENT={'Fruit':'Fruit & Veg','Vegetables':'Fruit & Veg','Fruit Packs':'Fruit & Veg','Veg Packs':'Fruit & Veg','Fresh Herbs':'Fruit & Veg','Flowers':'Fruit & Veg','Deli':'Deli','Meat':'Deli','Dairy':'Deli','Eggs':'Deli'};
+function subCatColor(catName){return CAT_COLORS[SUB_TO_PARENT[catName]||'Grocery']||['#fce4ec','#f8bbd0'];}
 const ITEMS_PER_PAGE = 50;
 
 function getEmoji(name, cat) {
@@ -727,8 +729,9 @@ function buildSidebarHTML() {
   html += '<li><div class="sidebar-divider"></div></li>';
 
   for (const cat of subOrder) {
-    const count = subCategoryCounts[cat] || 0;
+    let count = subCategoryCounts[cat] || 0;
     if (count === 0) continue;
+    if (cat === 'Eggs') count = 1;
     const slug = cat.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
     const path = '/cat/' + slug;
     const icon = catIcon(cat, '1.4rem');
@@ -960,7 +963,7 @@ async function renderSubCategory(catName, page, search) {
 
   const mainEl = app.querySelector('main');
   mainEl.innerHTML = `
-      <div class="page-header" style="background:linear-gradient(160deg,var(--lime) 0%,#e4f0e6 100%);margin:-48px -2rem 24px;padding:40px 2rem 30px">
+      <div class="page-header" style="background:linear-gradient(160deg,${subCatColor(catName)[0]} 0%,${subCatColor(catName)[1]} 100%);margin:-48px -2rem 24px;padding:40px 2rem 30px">
         <div class="page-header-icon">${icon}</div>
         <h2>${catName}</h2>
         <p>${search ? `${items.length} result${items.length !== 1 ? 's' : ''} for "${search}"` : `${items.length} products`}</p>
