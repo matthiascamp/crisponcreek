@@ -1071,13 +1071,20 @@ let currentSort = 'popular';
 
 function sortProducts(items, sort) {
   const copy = [...items];
-  switch (sort) {
-    case 'price-asc': return copy.sort((a, b) => a.price - b.price);
-    case 'price-desc': return copy.sort((a, b) => b.price - a.price);
-    case 'name-asc': return copy.sort((a, b) => a.name.localeCompare(b.name));
-    case 'name-desc': return copy.sort((a, b) => b.name.localeCompare(a.name));
-    default: return copy;
-  }
+  const secondary = (a, b) => {
+    switch (sort) {
+      case 'price-asc': return a.price - b.price;
+      case 'price-desc': return b.price - a.price;
+      case 'name-asc': return a.name.localeCompare(b.name);
+      case 'name-desc': return b.name.localeCompare(a.name);
+      default: return 0;
+    }
+  };
+  return copy.sort((a, b) => {
+    const aImg = a.img ? 0 : 1;
+    const bImg = b.img ? 0 : 1;
+    return aImg - bImg || secondary(a, b);
+  });
 }
 
 function sortBarHTML(count) {
