@@ -876,7 +876,7 @@ async function renderCategory(route, page, search) {
 
   const mainEl = app.querySelector('main');
   mainEl.innerHTML = `
-      <div class="page-header" style="background:linear-gradient(160deg,${c[0]} 0%,${c[1]} 100%);margin:-48px -2rem 24px;padding:40px 2rem 30px">
+      <div class="page-header" style="background:linear-gradient(160deg,${c[0]} 0%,${c[1]} 100%);margin:-48px -2rem 24px;padding:120px 2rem 30px">
         <div class="page-header-icon">${CAT_ICONS[route.category] || '📦'}</div>
         <h2>${route.name}</h2>
         <p>${search ? `${items.length} result${items.length !== 1 ? 's' : ''} for "${search}"` : `${items.length} products, ranked by popularity`}</p>
@@ -924,7 +924,7 @@ async function renderSubCategory(catName, page, search) {
 
   const mainEl = app.querySelector('main');
   mainEl.innerHTML = `
-      <div class="page-header" style="background:linear-gradient(160deg,var(--lime) 0%,#e4f0e6 100%);margin:-48px -2rem 24px;padding:40px 2rem 30px">
+      <div class="page-header" style="background:linear-gradient(160deg,var(--lime) 0%,#e4f0e6 100%);margin:-48px -2rem 24px;padding:120px 2rem 30px">
         <div class="page-header-icon">${icon}</div>
         <h2>${catName}</h2>
         <p>${search ? `${items.length} result${items.length !== 1 ? 's' : ''} for "${search}"` : `${items.length} products`}</p>
