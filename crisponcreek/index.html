@@ -679,6 +679,17 @@ const SUB_CAT_ICONS = {
   'Freezer':'🧊','Flowers':'💐','Nuts & Snacks':'🥜','Cards & Ice Cream':'🍦',
   'Coffee':'☕','Meat':'🥩','Fruit & Veg':'🥬','Best Sellers':'⭐'
 };
+const SUB_CAT_PHOTOS = {
+  'Vegetables':'crisp_on_creek_fruit_veg_images/Broccoli.jpg',
+  'Fresh Herbs':'crisp_on_creek_fruit_veg_images/Basil_Large_Bunch.jpg',
+  'Deli':'crisp_on_creek_deli_images/Casalingo_Prosciutto.jpg',
+  'Dairy':'crisp_on_creek_deli_images/Norco_Fresh_Milk.jpg'
+};
+function catIcon(cat, size) {
+  const photo = SUB_CAT_PHOTOS[cat];
+  if (photo) return `<img src="${photo}" style="width:${size||'2.4rem'};height:${size||'2.4rem'};border-radius:50%;object-fit:cover">`;
+  return SUB_CAT_ICONS[cat] || '📦';
+}
 
 let subCategoryCounts = {};
 
@@ -709,7 +720,7 @@ function buildSidebarHTML() {
     if (count === 0) continue;
     const slug = cat.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
     const path = '/cat/' + slug;
-    const icon = SUB_CAT_ICONS[cat] || '📦';
+    const icon = catIcon(cat, '1.4rem');
     html += `<li class="sidebar-item"><button class="sidebar-link${currentRoute === path ? ' active' : ''}" data-path="${path}" data-cat="${cat}">
       <span class="sidebar-icon">${icon}</span>${cat}<span class="sidebar-count">${count}</span></button></li>`;
   }
@@ -929,7 +940,7 @@ async function renderSubCategory(catName, page, search) {
 
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
   const pageItems = items.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
-  const icon = SUB_CAT_ICONS[catName] || '📦';
+  const icon = catIcon(catName, '3rem');
 
   const mainEl = app.querySelector('main');
   mainEl.innerHTML = `
