@@ -2,6 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<script>
+(() => {
+  const oldDomains = new Set(['crisponcreek.com', 'www.crisponcreek.com'])
+  if (!oldDomains.has(window.location.hostname.toLowerCase())) return
+
+  const redirectUrl = new URL(window.location.href)
+  redirectUrl.protocol = 'https:'
+  redirectUrl.hostname = 'crisponcreek.com.au'
+  window.location.replace(redirectUrl.toString())
+})()
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Crisp on Creek — Fresh Fruit, Veg & Groceries | Mt Gravatt</title>
 <meta name="description" content="Crisp on Creek is Mt Gravatt's favourite fruit shop and grocer. Fresh produce, quality deli, and everyday groceries at 1164 Cavendish Rd. Open 6am–7pm daily.">
