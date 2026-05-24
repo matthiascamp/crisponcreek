@@ -42,6 +42,7 @@
 }
 html{scroll-behavior:smooth}
 body{font-family:'Inter',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:15px;overflow-x:hidden}
+#app{min-height:calc(100vh - 180px)}
 
 /* -- Animations -- */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
@@ -93,10 +94,12 @@ header.scrolled{background:rgba(255,255,255,.85);box-shadow:0 8px 40px rgba(27,6
 .sd-name mark{background:rgba(64,145,108,.15);color:var(--forest);font-weight:700;border-radius:2px;padding:0 1px}
 .sd-cat{font-size:11px;color:var(--textM)}
 .sd-price{font-size:15px;font-weight:700;color:var(--forest);white-space:nowrap;flex-shrink:0}
+.sd-price.unavailable{font-size:12px;color:var(--textM);font-weight:700}
 .sd-unit{font-size:10px;color:var(--textM);font-weight:400;margin-left:2px}
 .sd-add{width:32px;height:32px;border:none;background:var(--forest);color:#fff;border-radius:8px;font-size:16px;font-weight:700;cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;opacity:0}
 .sd-item:hover .sd-add{opacity:1}
 .sd-add:hover{background:var(--pop);transform:scale(1.1)}
+.sd-add:disabled{background:#d6ded9;color:var(--textM);cursor:not-allowed;transform:none}
 .sd-footer{padding:8px 14px;text-align:center;border-top:1px solid var(--border);font-size:12px;color:var(--green);font-weight:600;cursor:pointer;transition:background .15s}
 .sd-footer:hover{background:var(--lime)}
 .sd-empty{padding:24px 14px;text-align:center;color:var(--textM);font-size:13px}
@@ -278,10 +281,18 @@ main{flex:1;min-width:0;padding:48px 2rem 3rem}
 .pn{font-size:13px;font-weight:500;line-height:1.4;margin-bottom:8px;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--text)}
 .pm{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .pp{font-size:17px;font-weight:700;color:var(--forest)}
+.pp.market,.pp.unavailable,.pp.loading-price{font-size:15px;color:var(--textS)}
+.loading-price{position:relative}
+.old-price{font-size:12px;color:var(--textM);text-decoration:line-through;margin-right:6px;font-weight:500}
 .pu{font-size:10.5px;color:var(--textM);font-weight:400;margin-left:3px}
+.pbadges{display:flex;gap:6px;flex-wrap:wrap;margin:-2px 0 10px}
+.product-badge{font-size:10px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:999px;padding:3px 8px;background:rgba(64,145,108,.12);color:var(--forest)}
+.product-badge.special{background:rgba(232,105,58,.12);color:#c0472b}
+.product-badge.deal{background:rgba(245,166,35,.16);color:#8a5b00}
 .padd{width:100%;height:36px;border-radius:10px;border:none;background:var(--forest);color:#fff;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;font-family:inherit;letter-spacing:.02em}
 .padd:hover{background:var(--pop);box-shadow:0 4px 12px rgba(232,105,58,.25);transform:translateY(-1px)}
 .padd:active{transform:scale(.97)}
+.padd:disabled{background:#d6ded9;color:var(--textM);cursor:not-allowed;box-shadow:none;transform:none}
 
 
 /* -- Pagination -- */
@@ -414,7 +425,9 @@ footer::after{content:'';position:absolute;width:500px;height:500px;border-radiu
 .pm-name{font-family:'Playfair Display',Georgia,serif;font-size:1.4rem;font-weight:700;color:var(--forest);line-height:1.3;margin-bottom:12px}
 .pm-price-row{display:flex;align-items:baseline;gap:8px;margin-bottom:20px}
 .pm-price{font-size:2rem;font-weight:800;color:var(--forest);font-family:'Playfair Display',Georgia,serif}
+.pm-price.market,.pm-price.unavailable{font-size:1.55rem;color:var(--textS)}
 .pm-unit{font-size:14px;color:var(--textM)}
+.pm-note{font-size:13px;color:var(--textS);line-height:1.55;margin:-8px 0 16px;padding:10px 12px;border-radius:10px;background:var(--lime)}
 .pm-qty-row{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .pm-qty-label{font-size:13px;font-weight:500;color:var(--textS)}
 .pm-qty-ctrl{display:flex;align-items:center;gap:8px}
@@ -423,6 +436,7 @@ footer::after{content:'';position:absolute;width:500px;height:500px;border-radiu
 .pm-qty-val{font-size:18px;font-weight:700;min-width:28px;text-align:center}
 .pm-add{width:100%;padding:16px;border:none;border-radius:14px;background:var(--forest);color:#fff;font-size:15px;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
 .pm-add:hover{background:var(--pop);box-shadow:0 8px 24px rgba(232,105,58,.25);transform:translateY(-1px)}
+.pm-add:disabled{background:#d6ded9;color:var(--textM);cursor:not-allowed;box-shadow:none;transform:none}
 @media(max-width:480px){
   .product-modal-overlay{padding:0;align-items:flex-end}
   .product-modal{max-width:100%;border-radius:var(--rL) var(--rL) 0 0;max-height:85vh}
@@ -482,7 +496,7 @@ footer::after{content:'';position:absolute;width:500px;height:500px;border-radiu
 .toast.show{transform:translateX(-50%) translateY(0)}
 
 /* -- Loading -- */
-.loading{text-align:center;padding:80px 2rem;color:var(--textM)}
+.loading{text-align:center;padding:80px 2rem;color:var(--textM);min-height:55vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .loading-spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--green);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
 @keyframes spin{to{transform:rotate(360deg)}}
 
@@ -755,17 +769,20 @@ footer::after{content:'';position:absolute;width:500px;height:500px;border-radiu
 /* ================================================================
    DATA LAYER / API ABSTRACTION
    ================================================================
-   All product data flows through ProductAPI.
-   Currently loads from a local JSON file.
-   To connect to Profit Track, replace the fetch in _load()
-   with your API endpoint. The rest of the app stays the same.
+   Product names/images still come from local website data.
+   Fruit and Vegetable prices, specials, and deals are hydrated from Supabase.
    ================================================================ */
+// Frontend-only Supabase config. Use a publishable/anon key here only.
+// Never paste a service-role key, sb_secret key, or postgresql:// database URL into the website.
+window.CRISP_SUPABASE_URL = window.CRISP_SUPABASE_URL || 'https://xdcthdztlfjajsugubaz.supabase.co';
+window.CRISP_SUPABASE_ANON_KEY = window.CRISP_SUPABASE_ANON_KEY || 'sb_publishable_ZDlhyh1LwDHS7r1YQLdHDg_ppP0dOKK';
+
 const ProductAPI = {
   _data: null,
   _loading: null,
 
-  // Replace this URL with your Profit Track API endpoint when ready.
-  // Expected response: array of { name, price, pcode, category, rank, sales, img }
+  // Local display metadata: array of { name, price, pcode, category, rank, sales, img }.
+  // For Fruit & Veg, price and pcode from this file are not used for live matching.
   _endpoint: 'top_products.json',
 
   _hiddenPcodes: new Set(['27759','27732','27368','27750','27877','27740','27805','27873','27899','27729','27852','27854','27619']),
@@ -791,23 +808,47 @@ const ProductAPI = {
 
   async getAll() {
     const all = await this._load();
-    return all.filter(p => !this._isHiddenEgg(p));
+    return LivePricingAPI.hydrateMixedProducts(all.filter(p => !this._isHiddenEgg(p)));
+  },
+
+  async getAllDisplay() {
+    const all = await this._load();
+    return LivePricingAPI.markMixedProductsLoading(all.filter(p => !this._isHiddenEgg(p)));
   },
 
   async getByCategory(category) {
+    if (category === 'Fruit & Veg') return LivePricingAPI.getAllLiveFruitVegProducts();
+    const all = await this._load();
+    return all.filter(p => p.category === category && !this._isHiddenEgg(p));
+  },
+
+  async getByCategoryDisplay(category) {
+    if (category === 'Fruit & Veg') return LivePricingAPI.getAllLiveFruitVegDisplayProducts();
     const all = await this._load();
     return all.filter(p => p.category === category && !this._isHiddenEgg(p));
   },
 
   async getBestSellers(limit) {
     const all = await this._load();
-    return all.filter(p => !this._isHiddenEgg(p)).slice(0, limit);
+    const hydrated = await LivePricingAPI.hydrateMixedProducts(all.filter(p => !this._isHiddenEgg(p)));
+    return hydrated.slice(0, limit);
+  },
+
+  async getBestSellersDisplay(limit) {
+    const all = await this.getAllDisplay();
+    return all.slice(0, limit);
   },
 
   async search(query) {
-    const all = await this._load();
+    const all = await this.getAll();
     const q = query.toLowerCase();
-    return all.filter(p => p.name.toLowerCase().includes(q) && !this._isHiddenEgg(p));
+    return all.filter(p => p.name.toLowerCase().includes(q));
+  },
+
+  async searchDisplay(query) {
+    const all = await this.getAllDisplay();
+    const q = query.toLowerCase();
+    return all.filter(p => p.name.toLowerCase().includes(q));
   },
 
   async getCategoryCounts() {
@@ -816,17 +857,669 @@ const ProductAPI = {
     for (const p of all) {
       counts[p.category] = (counts[p.category] || 0) + 1;
     }
+    try {
+      const data = await loadSubCatData();
+      counts['Fruit & Veg'] = (data.Fruit || []).length + (data.Vegetables || []).length;
+    } catch(e) {
+      console.warn('Fruit/Veg count unavailable', e);
+    }
     return counts;
   },
 
-  // Hook for future Profit Track integration:
-  // Update product data from API (call on interval or on demand)
   async refresh() {
     this._data = null;
     this._loading = null;
+    LivePricingAPI.clearCache();
     return this._load();
   }
 };
+
+const FRUIT_VEG_LIVE_CATEGORIES = new Set(['Fruit', 'Vegetables']);
+
+function isFruitVegCategory(category) {
+  return category === 'Fruit & Veg' || FRUIT_VEG_LIVE_CATEGORIES.has(category);
+}
+
+const LivePricingAPI = {
+  _allFruitVeg: null,
+  _allFruitVegLoading: null,
+  _topMetaByName: null,
+  _topMetaLoading: null,
+  _lookupMap: null,
+  _lookupMapLoading: null,
+  _lookupMapEndpoint: 'website-live-lookup-map.json',
+  _lastDuplicateLookupCodes: [],
+
+  clearCache() {
+    this._allFruitVeg = null;
+    this._allFruitVegLoading = null;
+    this._topMetaByName = null;
+    this._topMetaLoading = null;
+    this._lookupMap = null;
+    this._lookupMapLoading = null;
+    this._lastDuplicateLookupCodes = [];
+  },
+
+  isConfigured() {
+    return Boolean(window.CRISP_SUPABASE_URL && window.CRISP_SUPABASE_ANON_KEY);
+  },
+
+  _normaliseCode(value) {
+    return String(value ?? '').trim();
+  },
+
+  _nameKey(value) {
+    return String(value ?? '').trim().replace(/\s+/g, ' ').toUpperCase();
+  },
+
+  _status(value) {
+    return String(value || '').trim().toLowerCase();
+  },
+
+  _databaseBoolean(value) {
+    return value === true || value === 1 || String(value).toLowerCase() === 'true';
+  },
+
+  _isUsableMapRow(row) {
+    const status = this._status(row?.status);
+    const code = this._normaliseCode(row?.suggested_lookup_code);
+    return Boolean(code && (status === 'safe' || status === 'review_recommended'));
+  },
+
+  _isManualReviewMapRow(row) {
+    return this._status(row?.status) === 'manual_review';
+  },
+
+  _fruitVegMapKey(category, name, code) {
+    return `${this._nameKey(category)}|${this._nameKey(name)}|${this._normaliseCode(code)}`;
+  },
+
+  async _getLookupMap() {
+    if (this._lookupMap) return this._lookupMap;
+    if (this._lookupMapLoading) return this._lookupMapLoading;
+
+    this._lookupMapLoading = fetch(this._lookupMapEndpoint)
+      .then(response => {
+        if (!response.ok) throw new Error(`Lookup map request failed: ${response.status}`);
+        return response.json();
+      })
+      .then(raw => {
+        const fruitVegByKey = new Map();
+        const topByName = new Map();
+        const fruitVegRows = Array.isArray(raw.fruit_vegetables) ? raw.fruit_vegetables : [];
+        const topRows = Array.isArray(raw.top_products) ? raw.top_products : [];
+
+        for (const row of fruitVegRows) {
+          const key = this._fruitVegMapKey(row.source_section, row.website_product_name, row.products_json_code);
+          if (key) fruitVegByKey.set(key, row);
+        }
+        for (const row of topRows) {
+          const key = this._nameKey(row.website_product_name);
+          if (key) topByName.set(key, row);
+        }
+
+        this._lookupMap = {
+          raw,
+          fruitVegByKey,
+          topByName,
+          summary: raw.summary || {}
+        };
+        this._lookupMapLoading = null;
+        return this._lookupMap;
+      })
+      .catch(error => {
+        console.warn('Live lookup map unavailable', error);
+        this._lookupMap = {
+          raw: { summary: {} },
+          fruitVegByKey: new Map(),
+          topByName: new Map(),
+          summary: {}
+        };
+        this._lookupMapLoading = null;
+        return this._lookupMap;
+      });
+
+    return this._lookupMapLoading;
+  },
+
+  _headers() {
+    const key = window.CRISP_SUPABASE_ANON_KEY;
+    const headers = { apikey: key };
+    if (String(key).startsWith('eyJ')) headers.Authorization = `Bearer ${key}`;
+    return headers;
+  },
+
+  _restUrl(table, params) {
+    const base = String(window.CRISP_SUPABASE_URL || '').replace(/\/+$/, '');
+    return `${base}/rest/v1/${table}?${params.toString()}`;
+  },
+
+  async _request(table, params) {
+    if (!this.isConfigured()) throw new Error('Supabase config is missing');
+    const response = await fetch(this._restUrl(table, params), { headers: this._headers() });
+    if (!response.ok) {
+      const body = await response.text();
+      throw new Error(`Supabase ${table} request failed: ${response.status} ${body}`);
+    }
+    return response.json();
+  },
+
+  _chunks(values, size = 80) {
+    const chunks = [];
+    for (let i = 0; i < values.length; i += size) chunks.push(values.slice(i, i + size));
+    return chunks;
+  },
+
+  _inList(values) {
+    return `in.(${values.map(v => String(v).replace(/"/g, '')).join(',')})`;
+  },
+
+  _todayISO() {
+    const d = new Date();
+    const m = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${d.getFullYear()}-${m}-${day}`;
+  },
+
+  _dateIsActive(row) {
+    const today = this._todayISO();
+    const start = row?.start_date ? String(row.start_date).slice(0, 10) : null;
+    const end = row?.end_date ? String(row.end_date).slice(0, 10) : null;
+    return (!start || start <= today) && (!end || end >= today);
+  },
+
+  async _getFruitVegRowsFromProductsJson() {
+    const data = await loadSubCatData();
+    return [...FRUIT_VEG_LIVE_CATEGORIES].flatMap(category =>
+      (data[category] || []).map(row => ({
+        ...row,
+        category,
+        websiteBarcode: this._normaliseCode(row.barcode)
+      }))
+    );
+  },
+
+  async _getTopProductMetaByName() {
+    if (this._topMetaByName) return this._topMetaByName;
+    if (this._topMetaLoading) return this._topMetaLoading;
+    this._topMetaLoading = ProductAPI._load().then(topProducts => {
+      const map = new Map();
+      for (const item of topProducts) {
+        const key = this._nameKey(item.name);
+        if (!key) continue;
+        map.set(key, {
+          img: item.img || '',
+          rank: item.rank || 9999,
+          sales: item.sales || 0
+        });
+      }
+      this._topMetaByName = map;
+      this._topMetaLoading = null;
+      return map;
+    });
+    return this._topMetaLoading;
+  },
+
+  async _fetchProductsByCodes(inputCodes) {
+    const codes = [...new Set(inputCodes.map(code => this._normaliseCode(code)).filter(Boolean))];
+    const byLookupCode = new Map(codes.map(code => [code, null]));
+    const matchesByCode = new Map(codes.map(code => [code, new Map()]));
+    const duplicateLookupCodes = [];
+    if (!codes.length || !this.isConfigured()) return byLookupCode;
+
+    try {
+      for (const chunk of this._chunks(codes)) {
+        const barcodeParams = new URLSearchParams({
+          select: 'id,barcode,plu,name,price,unit,active,open_price'
+        });
+        barcodeParams.set('active', 'eq.true');
+        barcodeParams.set('barcode', this._inList(chunk));
+
+        const pluParams = new URLSearchParams({
+          select: 'id,barcode,plu,name,price,unit,active,open_price'
+        });
+        pluParams.set('active', 'eq.true');
+        pluParams.set('plu', this._inList(chunk));
+
+        const [barcodeMatches, pluMatches] = await Promise.all([
+          this._request('products', barcodeParams),
+          this._request('products', pluParams)
+        ]);
+
+        for (const product of [...barcodeMatches, ...pluMatches]) {
+          const productBarcode = this._normaliseCode(product.barcode);
+          const productPlu = this._normaliseCode(product.plu);
+          for (const code of chunk) {
+            if (productBarcode === code || productPlu === code) {
+              const id = this._normaliseCode(product.id || `${productBarcode}|${productPlu}|${product.name}`);
+              matchesByCode.get(code)?.set(id, product);
+            }
+          }
+        }
+      }
+
+      for (const code of codes) {
+        const matches = [...(matchesByCode.get(code)?.values() || [])];
+        if (matches.length === 1) {
+          byLookupCode.set(code, matches[0]);
+        } else if (matches.length > 1) {
+          duplicateLookupCodes.push({ code, count: matches.length });
+          byLookupCode.set(code, null);
+        }
+      }
+    } catch(e) {
+      console.warn('Live Fruit/Veg product lookup failed', e);
+    }
+
+    this._lastDuplicateLookupCodes = duplicateLookupCodes;
+    return byLookupCode;
+  },
+
+  async getLiveProductByWebsiteBarcode(barcode) {
+    const productsByCode = await this._fetchProductsByCodes([barcode]);
+    return productsByCode.get(this._normaliseCode(barcode)) || null;
+  },
+
+  async getActiveSpecialsForProducts(productIds) {
+    const ids = [...new Set(productIds.filter(Boolean))];
+    const byProductId = new Map();
+    if (!ids.length || !this.isConfigured()) return byProductId;
+
+    try {
+      for (const chunk of this._chunks(ids, 60)) {
+        const params = new URLSearchParams({
+          select: 'product_id,special_price,start_date,end_date,active'
+        });
+        params.set('active', 'eq.true');
+        params.set('product_id', this._inList(chunk));
+        const rows = await this._request('specials', params);
+        for (const row of rows) {
+          if (!this._dateIsActive(row)) continue;
+          const current = byProductId.get(row.product_id);
+          const nextPrice = Number(row.special_price);
+          const currentPrice = current ? Number(current.special_price) : Number.POSITIVE_INFINITY;
+          if (!current || nextPrice < currentPrice) byProductId.set(row.product_id, row);
+        }
+      }
+    } catch(e) {
+      console.warn('Live specials lookup failed', e);
+    }
+
+    return byProductId;
+  },
+
+  async getActiveDealsForProducts(productIds) {
+    const ids = [...new Set(productIds.filter(Boolean))];
+    const byProductId = new Map();
+    if (!ids.length || !this.isConfigured()) return byProductId;
+
+    try {
+      for (const chunk of this._chunks(ids, 60)) {
+        const productParams = new URLSearchParams({
+          select: 'product_id,deal_id'
+        });
+        productParams.set('product_id', this._inList(chunk));
+        const dealProducts = await this._request('deal_products', productParams);
+        const dealIds = [...new Set(dealProducts.map(row => row.deal_id).filter(Boolean))];
+        if (!dealIds.length) continue;
+
+        const dealParams = new URLSearchParams({
+          select: 'id,config,active,start_date,end_date'
+        });
+        dealParams.set('active', 'eq.true');
+        dealParams.set('id', this._inList(dealIds));
+        const deals = await this._request('deals', dealParams);
+        const activeDealsById = new Map(deals
+          .filter(deal => this._dateIsActive(deal))
+          .map(deal => [deal.id, deal]));
+
+        for (const row of dealProducts) {
+          const deal = activeDealsById.get(row.deal_id);
+          if (!deal || !this._dateIsActive(deal)) continue;
+          if (!byProductId.has(row.product_id)) byProductId.set(row.product_id, []);
+          byProductId.get(row.product_id).push(deal);
+        }
+      }
+    } catch(e) {
+      console.warn('Live deals lookup failed', e);
+    }
+
+    return byProductId;
+  },
+
+  _mergeWebsiteAndLiveProduct(row, liveProduct, meta, special, deals) {
+    const websiteBarcode = this._normaliseCode(row.websiteBarcode || row.barcode);
+    const lookupCode = this._normaliseCode(row.liveLookupCode || websiteBarcode);
+    const livePriceNumber = Number(liveProduct?.price);
+    const openPrice = this._databaseBoolean(liveProduct?.open_price) || livePriceNumber === 0;
+    const regularPrice = liveProduct && !openPrice ? Number(liveProduct.price) : null;
+    const specialPrice = special && !openPrice ? Number(special.special_price) : null;
+    const hasSpecialPrice = Number.isFinite(specialPrice);
+    const price = liveProduct && !openPrice
+      ? (hasSpecialPrice ? specialPrice : (Number.isFinite(regularPrice) ? regularPrice : null))
+      : null;
+
+    return {
+      name: row.name,
+      category: row.category,
+      websiteBarcode,
+      liveLookupCode: lookupCode,
+      pcode: lookupCode || websiteBarcode || this._normaliseCode(liveProduct?.id || row.name),
+      img: meta?.img || row.img || '',
+      rank: meta?.rank || row.rank || 9999,
+      sales: meta?.sales || row.sales || 0,
+      livePriceRequired: true,
+      liveAvailable: Boolean(liveProduct),
+      liveProductId: liveProduct?.id || null,
+      liveProduct: liveProduct || null,
+      openPrice,
+      price,
+      regularPrice: Number.isFinite(regularPrice) ? regularPrice : null,
+      unit: liveProduct?.unit || row.unit || getUnit(row.name),
+      special: special || null,
+      deals: deals || [],
+      lookupCodeField: row.lookupCodeField || 'products.json.barcode',
+      lookupSourceSection: row.lookupSourceSection || row.category,
+      mappingStatus: row.mappingStatus || null,
+      mappingReviewRequired: row.mappingReviewRequired || false,
+      supabaseLookupFields: ['products.barcode', 'products.plu']
+    };
+  },
+
+  _unavailableWebsiteProduct(item) {
+    const websiteBarcode = this._normaliseCode(item.websiteBarcode || item.barcode || '');
+    const lookupCode = this._normaliseCode(item.liveLookupCode || '');
+    return {
+      name: item.name,
+      category: item.category || 'Fruit & Veg',
+      websiteBarcode,
+      liveLookupCode: lookupCode,
+      pcode: lookupCode || websiteBarcode || this._normaliseCode(item.pcode || item.name),
+      img: item.img || '',
+      rank: item.rank || 9999,
+      sales: item.sales || 0,
+      livePriceRequired: true,
+      liveAvailable: false,
+      liveProductId: null,
+      liveProduct: null,
+      openPrice: false,
+      price: null,
+      regularPrice: null,
+      unit: item.unit || getUnit(item.name),
+      special: null,
+      deals: [],
+      lookupCodeField: item.lookupCodeField || (lookupCode ? 'website-live-lookup-map.suggested_lookup_code' : 'products.json.barcode'),
+      lookupSourceSection: item.lookupSourceSection || item.category || 'Fruit & Veg',
+      mappingStatus: item.mappingStatus || null,
+      mappingReviewRequired: item.mappingReviewRequired || false,
+      supabaseLookupFields: ['products.barcode', 'products.plu']
+    };
+  },
+
+  _loadingWebsiteProduct(item) {
+    const websiteBarcode = this._normaliseCode(item.websiteBarcode || item.barcode || '');
+    const lookupCode = this._normaliseCode(item.liveLookupCode || websiteBarcode || '');
+    return {
+      name: item.name,
+      category: item.category || 'Fruit & Veg',
+      websiteBarcode,
+      liveLookupCode: lookupCode,
+      pcode: lookupCode || websiteBarcode || `loading:${this._nameKey(item.name)}`,
+      img: item.img || '',
+      rank: item.rank || 9999,
+      sales: item.sales || 0,
+      livePriceRequired: true,
+      liveAvailable: null,
+      priceLoading: true,
+      liveProductId: null,
+      liveProduct: null,
+      openPrice: false,
+      price: null,
+      regularPrice: null,
+      unit: item.unit || getUnit(item.name),
+      special: null,
+      deals: [],
+      lookupCodeField: item.lookupCodeField || 'pending live lookup',
+      lookupSourceSection: item.lookupSourceSection || item.category || 'Fruit & Veg',
+      mappingStatus: item.mappingStatus || null,
+      mappingReviewRequired: item.mappingReviewRequired || false,
+      supabaseLookupFields: ['products.barcode', 'products.plu']
+    };
+  },
+
+  markMixedProductsLoading(items) {
+    return items.map(item => isFruitVegCategory(item.category)
+      ? this._loadingWebsiteProduct({
+          ...item,
+          category: item.category || 'Fruit & Veg',
+          liveLookupCode: '',
+          lookupCodeField: 'website-live-lookup-map.top_products.suggested_lookup_code'
+        })
+      : item);
+  },
+
+  async getAllLiveFruitVegDisplayProducts() {
+    const [rows, metaByName] = await Promise.all([
+      this._getFruitVegRowsFromProductsJson(),
+      this._getTopProductMetaByName()
+    ]);
+
+    return rows.map(row => {
+      const websiteBarcode = this._normaliseCode(row.websiteBarcode || row.barcode);
+      const meta = metaByName.get(this._nameKey(row.name)) || {};
+      return this._loadingWebsiteProduct({
+        ...row,
+        websiteBarcode,
+        liveLookupCode: websiteBarcode,
+        img: meta.img || row.img || '',
+        rank: meta.rank || row.rank || 9999,
+        sales: meta.sales || row.sales || 0,
+        lookupCodeField: 'website-live-lookup-map.fruit_vegetables.suggested_lookup_code'
+      });
+    });
+  },
+
+  async getLiveFruitVegProducts(productsJsonRows) {
+    const [lookupMap, metaByName] = await Promise.all([
+      this._getLookupMap(),
+      this._getTopProductMetaByName()
+    ]);
+
+    const rows = productsJsonRows.map(row => {
+      const websiteBarcode = this._normaliseCode(row.websiteBarcode || row.barcode);
+      const mapRow = lookupMap.fruitVegByKey.get(this._fruitVegMapKey(row.category, row.name, websiteBarcode)) || null;
+      const useMapCode = this._isUsableMapRow(mapRow);
+      const manualReview = this._isManualReviewMapRow(mapRow);
+      const lookupCode = manualReview
+        ? ''
+        : (useMapCode ? this._normaliseCode(mapRow.suggested_lookup_code) : websiteBarcode);
+
+      return {
+        ...row,
+        websiteBarcode,
+        liveLookupCode: lookupCode,
+        lookupCodeField: useMapCode ? 'website-live-lookup-map.fruit_vegetables.suggested_lookup_code' : 'products.json.barcode',
+        lookupSourceSection: row.category,
+        mappingStatus: mapRow?.status || (useMapCode ? 'safe' : 'products_json_barcode'),
+        mappingReviewRequired: manualReview,
+        lookupMapRow: mapRow
+      };
+    });
+
+    const codes = rows.map(row => row.liveLookupCode);
+    const productsByCode = await this._fetchProductsByCodes(codes);
+    const productIds = [...new Set([...productsByCode.values()].filter(Boolean).map(product => product.id))];
+    const [specialsByProduct, dealsByProduct] = await Promise.all([
+      this.getActiveSpecialsForProducts(productIds),
+      this.getActiveDealsForProducts(productIds)
+    ]);
+
+    return rows.map(row => {
+      const liveProduct = row.liveLookupCode ? productsByCode.get(row.liveLookupCode) || null : null;
+      const meta = metaByName.get(this._nameKey(row.name)) || {};
+      const special = liveProduct ? specialsByProduct.get(liveProduct.id) : null;
+      const deals = liveProduct ? dealsByProduct.get(liveProduct.id) || [] : [];
+      return this._mergeWebsiteAndLiveProduct(row, liveProduct, meta, special, deals);
+    });
+  },
+
+  async _getTopProductLiveMatches(items, lookupMap) {
+    const rows = items
+      .filter(item => isFruitVegCategory(item.category))
+      .map(item => {
+        const mapRow = lookupMap.topByName.get(this._nameKey(item.name)) || null;
+        const useMapCode = this._isUsableMapRow(mapRow);
+        const manualReview = this._isManualReviewMapRow(mapRow);
+        return {
+          item,
+          mapRow,
+          useMapCode,
+          manualReview,
+          lookupCode: useMapCode && !manualReview ? this._normaliseCode(mapRow.suggested_lookup_code) : ''
+        };
+      })
+      .filter(row => row.mapRow);
+
+    const productsByCode = await this._fetchProductsByCodes(rows.map(row => row.lookupCode));
+    const productIds = [...new Set([...productsByCode.values()].filter(Boolean).map(product => product.id))];
+    const [specialsByProduct, dealsByProduct] = await Promise.all([
+      this.getActiveSpecialsForProducts(productIds),
+      this.getActiveDealsForProducts(productIds)
+    ]);
+
+    const byName = new Map();
+    for (const row of rows) {
+      const key = this._nameKey(row.item.name);
+      const liveProduct = row.lookupCode ? productsByCode.get(row.lookupCode) || null : null;
+      const liveItem = row.useMapCode && liveProduct
+        ? this._mergeWebsiteAndLiveProduct({
+            ...row.item,
+            category: row.item.category || 'Fruit & Veg',
+            websiteBarcode: '',
+            liveLookupCode: row.lookupCode,
+            lookupCodeField: 'website-live-lookup-map.top_products.suggested_lookup_code',
+            lookupSourceSection: 'top_products',
+            mappingStatus: row.mapRow.status,
+            mappingReviewRequired: row.manualReview,
+            lookupMapRow: row.mapRow
+          }, liveProduct, row.item, specialsByProduct.get(liveProduct.id), dealsByProduct.get(liveProduct.id) || [])
+        : this._unavailableWebsiteProduct({
+            ...row.item,
+            liveLookupCode: row.lookupCode,
+            lookupCodeField: 'website-live-lookup-map.top_products.suggested_lookup_code',
+            lookupSourceSection: 'top_products',
+            mappingStatus: row.mapRow?.status || null,
+            mappingReviewRequired: row.manualReview || !row.useMapCode
+          });
+      byName.set(key, liveItem);
+    }
+
+    window.CrispTopProductLivePricingReport = {
+      rowsAttempted: rows.length,
+      matchedCount: [...byName.values()].filter(product => product.liveAvailable).length,
+      missingCount: [...byName.values()].filter(product => !product.liveAvailable).length,
+      manualReview: rows
+        .filter(row => row.manualReview)
+        .map(row => ({
+          name: row.item.name,
+          candidate: row.mapRow?.candidate_lookup_code || ''
+        })),
+      lookupCodeField: 'website-live-lookup-map.top_products.suggested_lookup_code',
+      supabaseLookupFields: ['products.barcode', 'products.plu']
+    };
+
+    return byName;
+  },
+
+  async getAllLiveFruitVegProducts() {
+    if (this._allFruitVeg) return this._allFruitVeg;
+    if (this._allFruitVegLoading) return this._allFruitVegLoading;
+
+    this._allFruitVegLoading = (async () => {
+      const rows = await this._getFruitVegRowsFromProductsJson();
+      const products = await this.getLiveFruitVegProducts(rows);
+      const missing = products
+        .filter(product => !product.liveAvailable)
+        .map(product => ({
+          name: product.name,
+          category: product.category,
+          productsJsonBarcode: product.websiteBarcode,
+          attemptedLookupCode: product.liveLookupCode,
+          mappingStatus: product.mappingStatus || '',
+          lookupCodeField: product.lookupCodeField
+        }));
+
+      window.CrispLivePricingReport = {
+        rowsAttempted: rows.length,
+        matchedCount: products.length - missing.length,
+        missingCount: missing.length,
+        missing,
+        reviewRecommended: products
+          .filter(product => product.mappingStatus === 'review_recommended')
+          .map(product => ({
+            name: product.name,
+            category: product.category,
+            suggestedLookupCode: product.liveLookupCode,
+            matchedProduct: product.liveProduct?.name || ''
+          })),
+        duplicateLookupCodes: this._lastDuplicateLookupCodes,
+        lookupCodeField: 'website-live-lookup-map.fruit_vegetables.suggested_lookup_code when present; otherwise products.json.barcode',
+        supabaseLookupFields: ['products.barcode', 'products.plu']
+      };
+
+      this._allFruitVeg = products;
+      this._allFruitVegLoading = null;
+      return products;
+    })();
+
+    return this._allFruitVegLoading;
+  },
+
+  async hydrateMixedProducts(items) {
+    if (!items.some(item => isFruitVegCategory(item.category))) return items;
+
+    const [lookupMap, liveFruitVeg] = await Promise.all([
+      this._getLookupMap(),
+      this.getAllLiveFruitVegProducts()
+    ]);
+    const topByName = await this._getTopProductLiveMatches(items, lookupMap);
+    const liveByName = new Map();
+    for (const product of liveFruitVeg) {
+      const key = this._nameKey(product.name);
+      if (!liveByName.has(key)) liveByName.set(key, product);
+    }
+
+    return items.map(item => {
+      if (!isFruitVegCategory(item.category)) return item;
+      const key = this._nameKey(item.name);
+      if (topByName.has(key)) return topByName.get(key);
+      const liveProduct = liveByName.get(key);
+      if (!liveProduct) return this._unavailableWebsiteProduct(item);
+      return {
+        ...liveProduct,
+        img: item.img || liveProduct.img,
+        rank: item.rank || liveProduct.rank,
+        sales: item.sales || liveProduct.sales
+      };
+    });
+  }
+};
+
+async function getLiveProductByWebsiteBarcode(barcode) {
+  return LivePricingAPI.getLiveProductByWebsiteBarcode(barcode);
+}
+
+async function getLiveFruitVegProducts(productsJsonRows) {
+  return LivePricingAPI.getLiveFruitVegProducts(productsJsonRows);
+}
+
+async function getActiveSpecialsForProducts(productIds) {
+  return LivePricingAPI.getActiveSpecialsForProducts(productIds);
+}
+
+async function getActiveDealsForProducts(productIds) {
+  return LivePricingAPI.getActiveDealsForProducts(productIds);
+}
 
 /* ================================================================
    HELPERS
@@ -867,27 +1560,137 @@ function getUnit(n) {
   return '';
 }
 
+const RenderedProducts = new Map();
+
+function jsArg(value) {
+  return JSON.stringify(String(value ?? ''));
+}
+
+function escapeAttr(value) {
+  return String(value ?? '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+}
+
+function displayCategory(category) {
+  return SUB_TO_PARENT[category] || category;
+}
+
+function productRenderKey(p) {
+  if (p.livePriceRequired) return `live:${p.websiteBarcode || p.pcode || p.name}`;
+  return `static:${p.pcode || p.name}`;
+}
+
+function registerRenderedProduct(p) {
+  const key = productRenderKey(p);
+  RenderedProducts.set(key, p);
+  return key;
+}
+
+function productUnit(p) {
+  return p.unit || getUnit(p.name);
+}
+
+function productFixedPrice(p) {
+  const value = Number(p.price);
+  return Number.isFinite(value) ? value : null;
+}
+
+function productCanAdd(p) {
+  return !p.priceLoading && productFixedPrice(p) !== null && !p.openPrice && p.liveAvailable !== false;
+}
+
+function productStatusLabel(p) {
+  if (p.priceLoading) return 'Loading price...';
+  if (p.openPrice) return 'Market price';
+  if (p.livePriceRequired && !p.liveAvailable) return 'Unavailable';
+  return 'Unavailable';
+}
+
+function productPriceHTML(p, priceClass = 'pp', unitClass = 'pu') {
+  if (p.priceLoading) {
+    return `<span class="${priceClass} loading-price">Loading price...</span>`;
+  }
+  if (p.livePriceRequired && !p.liveAvailable) {
+    return `<span class="${priceClass} unavailable">Unavailable</span>`;
+  }
+  if (p.openPrice) {
+    return `<span class="${priceClass} market">Market price</span>`;
+  }
+  const price = productFixedPrice(p);
+  if (price === null) {
+    return `<span class="${priceClass} unavailable">Unavailable</span>`;
+  }
+  const oldPrice = p.special && Number.isFinite(Number(p.regularPrice)) && Number(p.regularPrice) > price
+    ? `<span class="old-price">$${Number(p.regularPrice).toFixed(2)}</span>`
+    : '';
+  return `${oldPrice}<span class="${priceClass}">$${price.toFixed(2)}</span><span class="${unitClass}">${productUnit(p)}</span>`;
+}
+
+function searchPriceHTML(p) {
+  if (p.priceLoading) return 'Loading price...';
+  if (p.livePriceRequired && !p.liveAvailable) return 'Unavailable';
+  if (p.openPrice) return 'Market price';
+  const price = productFixedPrice(p);
+  if (price === null) return 'Unavailable';
+  return `$${price.toFixed(2)}<span class="sd-unit">${productUnit(p)}</span>`;
+}
+
+function productBadgesHTML(p) {
+  const badges = [];
+  if (p.special) badges.push('<span class="product-badge special">Special</span>');
+  if (p.deals && p.deals.length) badges.push('<span class="product-badge deal">Deal</span>');
+  return badges.length ? `<div class="pbadges">${badges.join('')}</div>` : '';
+}
+
+function addButtonLabel(p) {
+  if (p.priceLoading) return 'Loading...';
+  if (!productCanAdd(p)) return p.openPrice ? 'Ask in store' : 'Unavailable';
+  return '+ Add to Cart';
+}
+
+function addProductToCartByKey(key) {
+  const product = RenderedProducts.get(key);
+  if (!product) return;
+  if (!productCanAdd(product)) {
+    showToast(productStatusLabel(product));
+    return;
+  }
+  addToCart(product.pcode, cleanName(product.name), productFixedPrice(product), productUnit(product), product.img || '', product.category);
+}
+
+function toggleFavByKey(key) {
+  const product = RenderedProducts.get(key);
+  if (!product) return;
+  toggleFav(product.pcode, cleanName(product.name), productFixedPrice(product), productUnit(product), product.img || '', product.category);
+}
+
+function openProductModalByKey(key) {
+  const product = RenderedProducts.get(key);
+  if (product) openProductModal(product);
+}
+
 function productCard(p) {
-  const c = CAT_COLORS[p.category] || ['#f5f4f0','#eeedea'];
+  const key = registerRenderedProduct(p);
+  const colorCategory = displayCategory(p.category);
+  const c = CAT_COLORS[colorCategory] || ['#f5f4f0','#eeedea'];
   const hasImg = !!p.img;
   const imgHtml = hasImg
     ? `<img src="${p.img}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display=''">`
     : '';
   const emojiDisplay = hasImg ? 'display:none' : '';
-  const safeName = cleanName(p.name).replace(/'/g, "\\'").replace(/"/g, '&quot;');
-  const safeImg = (p.img || '').replace(/'/g, "\\'");
-  const unit = getUnit(p.name);
+  const safePcode = escapeAttr(p.pcode);
   const favActive = isFav(p.pcode) ? ' active' : '';
   const favStar = isFav(p.pcode) ? '&#9733;' : '&#9734;';
+  const canAdd = productCanAdd(p);
   return `<div class="pc anim">
-    <div class="pi" style="background:linear-gradient(145deg,${c[0]},${c[1]});cursor:pointer" onclick="openProductModal('${p.pcode}','${safeName}',${p.price},'${unit}','${safeImg}','${p.category}')">
+    <div class="pi" style="background:linear-gradient(145deg,${c[0]},${c[1]});cursor:pointer" onclick="openProductModalByKey(${jsArg(key)})">
       ${imgHtml}<span class="pe" style="${emojiDisplay}">${getEmoji(p.name, p.category)}</span>
-      <button class="fav-btn${favActive}" data-pcode="${p.pcode}" onclick="event.stopPropagation();toggleFav('${p.pcode}','${safeName}',${p.price},'${unit}','${safeImg}','${p.category}')">${favStar}</button>
+      <button class="fav-btn${favActive}" data-pcode="${safePcode}" onclick="event.stopPropagation();toggleFavByKey(${jsArg(key)})">${favStar}</button>
     </div>
     <div class="pf">
-      <div class="pn" style="cursor:pointer" onclick="openProductModal('${p.pcode}','${safeName}',${p.price},'${unit}','${safeImg}','${p.category}')">${cleanName(p.name)}</div>
-      <div class="pm"><div><span class="pp">$${p.price.toFixed(2)}</span><span class="pu">${unit}</span></div></div>
-      <button class="padd" onclick="addToCart('${p.pcode}','${safeName}',${p.price},'${unit}','${safeImg}','${p.category}')">+ Add to Cart</button>
+      <div class="pn" style="cursor:pointer" onclick="openProductModalByKey(${jsArg(key)})">${cleanName(p.name)}</div>
+      <div class="pm"><div>${productPriceHTML(p)}</div></div>
+      ${productBadgesHTML(p)}
+      <button class="padd" ${canAdd ? '' : 'disabled'} onclick="addProductToCartByKey(${jsArg(key)})">${addButtonLabel(p)}</button>
     </div>
   </div>`;
 }
@@ -942,9 +1745,14 @@ function saveCart(items) {
 let cart = loadCart();
 
 function addToCart(pcode, name, price, unit, img, cat) {
+  const numericPrice = Number(price);
+  if (!Number.isFinite(numericPrice)) {
+    showToast('Unavailable');
+    return;
+  }
   const existing = cart.find(i => i.pcode === pcode);
   if (existing) { existing.qty++; }
-  else { cart.push({ pcode, name, price, unit, img, cat, qty: 1 }); }
+  else { cart.push({ pcode, name, price: numericPrice, unit, img, cat, qty: 1 }); }
   saveCart(cart);
   updateCartUI();
   showCartToast(name);
@@ -1028,13 +1836,17 @@ function closeCart() {
 }
 
 let toastTimer;
-function showCartToast(name) {
+function showToast(message) {
   let t = document.getElementById('toast');
   if (!t) { t = document.createElement('div'); t.id = 'toast'; t.className = 'toast'; document.body.appendChild(t); }
   clearTimeout(toastTimer);
-  t.textContent = 'Added ' + name + ' to cart';
+  t.textContent = message;
   t.classList.add('show');
   toastTimer = setTimeout(() => t.classList.remove('show'), 1500);
+}
+
+function showCartToast(name) {
+  showToast('Added ' + name + ' to cart');
 }
 
 /* ================================================================
@@ -1054,7 +1866,10 @@ function isFav(pcode) { return favs.some(f => f.pcode === pcode); }
 function toggleFav(pcode, name, price, unit, img, category) {
   const idx = favs.findIndex(f => f.pcode === pcode);
   if (idx >= 0) { favs.splice(idx, 1); }
-  else { favs.push({ pcode, name, price: parseFloat(price), unit, img, category }); }
+  else {
+    const numericPrice = Number(price);
+    favs.push({ pcode, name, price: Number.isFinite(numericPrice) ? numericPrice : null, unit, img, category });
+  }
   saveFavs(favs);
   document.querySelectorAll(`.fav-btn[data-pcode="${pcode}"]`).forEach(btn => {
     btn.classList.toggle('active', isFav(pcode));
@@ -1071,10 +1886,15 @@ let currentSort = 'popular';
 
 function sortProducts(items, sort) {
   const copy = [...items];
+  const sortPrice = p => productCanAdd(p) ? productFixedPrice(p) : Number.POSITIVE_INFINITY;
   const secondary = (a, b) => {
     switch (sort) {
-      case 'price-asc': return a.price - b.price;
-      case 'price-desc': return b.price - a.price;
+      case 'price-asc': return sortPrice(a) - sortPrice(b);
+      case 'price-desc': {
+        const aCan = productCanAdd(a), bCan = productCanAdd(b);
+        if (aCan !== bCan) return aCan ? -1 : 1;
+        return sortPrice(b) - sortPrice(a);
+      }
       case 'name-asc': return a.name.localeCompare(b.name);
       case 'name-desc': return b.name.localeCompare(a.name);
       default: return 0;
@@ -1106,7 +1926,7 @@ function sortBarHTML(count) {
    ================================================================ */
 let modalQty = 1;
 
-function openProductModal(pcode, name, price, unit, img, category) {
+function legacyStaticProductModal(pcode, name, price, unit, img, category) {
   modalQty = 1;
   const c = CAT_COLORS[category] || ['#f5f4f0','#eeedea'];
   const hasImg = !!img;
@@ -1169,11 +1989,100 @@ function openProductModal(pcode, name, price, unit, img, category) {
   });
 }
 
-function updateModalQty(price) {
+function legacyStaticUpdateModalQty(price) {
   document.getElementById('pmQty').textContent = modalQty;
   document.getElementById('pmAdd').innerHTML = `
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
     Add to Cart — $${(price * modalQty).toFixed(2)}`;
+}
+
+// Live-aware modal used by product cards, search results, and specials.
+function openProductModal(productOrPcode, name, price, unit, img, category) {
+  modalQty = 1;
+  const product = typeof productOrPcode === 'object'
+    ? productOrPcode
+    : { pcode: productOrPcode, name, price: Number(price), unit, img, category };
+  const pcode = product.pcode;
+  name = cleanName(product.name);
+  price = productFixedPrice(product);
+  unit = productUnit(product);
+  img = product.img || '';
+  category = product.category || 'Grocery';
+  const colorCategory = displayCategory(category);
+  const canAdd = productCanAdd(product);
+  const c = CAT_COLORS[colorCategory] || ['#f5f4f0','#eeedea'];
+  const hasImg = !!img;
+  const imgHtml = hasImg
+    ? `<img src="${img}" alt="${name}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+    : '';
+  const emojiDisplay = hasImg ? 'display:none' : 'display:flex';
+  const modal = document.getElementById('productModal');
+  const mFavActive = isFav(pcode) ? ' active' : '';
+  const mFavStar = isFav(pcode) ? '&#9733;' : '&#9734;';
+  const noteHTML = !canAdd
+    ? `<div class="pm-note">${product.openPrice ? "Ask in store for today's market price." : 'Live price is unavailable for this item.'}</div>`
+    : '';
+  const qtyHTML = canAdd ? `<div class="pm-qty-row">
+        <span class="pm-qty-label">Quantity</span>
+        <div class="pm-qty-ctrl">
+          <button class="pm-qty-btn" id="pmMinus">&minus;</button>
+          <span class="pm-qty-val" id="pmQty">1</span>
+          <button class="pm-qty-btn" id="pmPlus">+</button>
+        </div>
+      </div>` : '';
+  const addLabel = canAdd ? `Add to Cart - $${price.toFixed(2)}` : addButtonLabel(product);
+
+  modal.innerHTML = `
+    <div class="pm-img" style="background:linear-gradient(145deg,${c[0]},${c[1]})">
+      ${imgHtml}<div class="pm-emoji" style="${emojiDisplay}">${getEmoji(name, category)}</div>
+      <button class="fav-btn${mFavActive}" data-pcode="${escapeAttr(pcode)}" id="pmFav" style="position:absolute;top:12px;left:12px;width:36px;height:36px;font-size:18px">${mFavStar}</button>
+      <button class="pm-close" id="pmClose">&times;</button>
+    </div>
+    <div class="pm-body">
+      <div class="pm-cat">${category}</div>
+      <div class="pm-name">${name}</div>
+      <div class="pm-price-row">
+        ${productPriceHTML(product, 'pm-price', 'pm-unit')}
+      </div>
+      ${productBadgesHTML(product)}
+      ${noteHTML}
+      ${qtyHTML}
+      <button class="pm-add" id="pmAdd" ${canAdd ? '' : 'disabled'}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        ${addLabel}
+      </button>
+    </div>`;
+
+  document.getElementById('productModalOverlay').classList.add('show');
+  document.body.style.overflow = 'hidden';
+
+  document.getElementById('pmClose').addEventListener('click', closeProductModal);
+  if (canAdd) {
+    document.getElementById('pmMinus').addEventListener('click', () => {
+      if (modalQty > 1) { modalQty--; updateModalQty(price); }
+    });
+    document.getElementById('pmPlus').addEventListener('click', () => {
+      modalQty++; updateModalQty(price);
+    });
+  }
+  document.getElementById('pmAdd').addEventListener('click', () => {
+    if (!canAdd) return;
+    for (let i = 0; i < modalQty; i++) addToCart(pcode, name, price, unit, img || '', category);
+    closeProductModal();
+  });
+  document.getElementById('pmFav').addEventListener('click', () => {
+    toggleFav(pcode, name, price, unit, img || '', category);
+    const btn = document.getElementById('pmFav');
+    btn.classList.toggle('active', isFav(pcode));
+    btn.innerHTML = isFav(pcode) ? '&#9733;' : '&#9734;';
+  });
+}
+
+function updateModalQty(price) {
+  document.getElementById('pmQty').textContent = modalQty;
+  document.getElementById('pmAdd').innerHTML = `
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    Add to Cart - $${(price * modalQty).toFixed(2)}`;
 }
 
 function closeProductModal() {
@@ -1360,29 +2269,32 @@ function updateNav() {
 /* ================================================================
    PAGE RENDERERS
    ================================================================ */
-async function renderHome(page, search) {
-  const app = document.getElementById('app');
+function routeStillCurrent(path, page, search) {
+  return currentRoute === path && currentPage === page && currentSearch === (search || '');
+}
 
-  if (search) {
-    app.innerHTML = `<div class="page-layout">
-      <main><div class="loading"><div class="loading-spinner"></div>Searching...</div></main></div>`;
-    updateGlobalSidebar();
-    const results = await ProductAPI.search(search);
-    const totalPages = Math.ceil(results.length / ITEMS_PER_PAGE);
-    const pageItems = results.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
+function getSpecialsItemsFrom(products) {
+  const withImg = products.filter(p => p.img);
+  const shuffled = [...withImg].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, 8);
+}
 
-    const mainEl = app.querySelector('main');
-    mainEl.innerHTML = `
-        <div class="sri" style="display:block">Found ${results.length} product${results.length !== 1 ? 's' : ''} for "${search}"</div>
-        ${results.length === 0 ? '<div class="nr"><div class="nre">&#128269;</div><h3>No products found</h3><p>Try a different search term</p></div>' : ''}
-        <div class="pg">${pageItems.map(p => productCard(p)).join('')}</div>
-        ${paginationHTML(page, totalPages)}`;
-    observeAnims();
-    return;
-  }
+function renderHomeSearchContent(app, page, search, results) {
+  const totalPages = Math.ceil(results.length / ITEMS_PER_PAGE);
+  const pageItems = results.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
+  app.innerHTML = `<div class="page-layout">
+    <main>
+      <div class="sri" style="display:block">Found ${results.length} product${results.length !== 1 ? 's' : ''} for "${search}"</div>
+      ${results.length === 0 ? '<div class="nr"><div class="nre">&#128269;</div><h3>No products found</h3><p>Try a different search term</p></div>' : ''}
+      <div class="pg">${pageItems.map(p => productCard(p)).join('')}</div>
+      ${paginationHTML(page, totalPages)}
+    </main>
+  </div>`;
+  updateGlobalSidebar();
+  observeAnims();
+}
 
-  const counts = await ProductAPI.getCategoryCounts();
-  const all = await ProductAPI.getAll();
+function renderHomeContent(app, page, all, counts) {
   const sorted = sortProducts(all, currentSort);
   const totalPages = Math.ceil(sorted.length / ITEMS_PER_PAGE);
   const pageItems = sorted.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
@@ -1432,21 +2344,23 @@ async function renderHome(page, search) {
   let specialsHTML = '';
   let seasonHTML = '';
   if (page === 1) {
-    const specials = await getSpecialsItems();
+    const specials = getSpecialsItemsFrom(all.slice(0, 100));
     if (specials.length) {
       specialsHTML = `<section class="specials-banner"><div class="specials-inner">
         <div class="specials-tag">Popular Right Now</div>
         <div class="specials-title">Top Picks This Week</div>
         <div class="specials-sub">Handpicked favourites flying off our shelves — grab them before they're gone.</div>
         <div class="specials-items">${specials.map(p => {
-          const safeName = cleanName(p.name).replace(/'/g, "\\'").replace(/"/g, '&quot;');
-          const safeImg = (p.img || '').replace(/'/g, "\\'");
-          const unit = getUnit(p.name);
-          return `<div class="specials-item\" onclick=\"openProductModal('${p.pcode}','${safeName}',${p.price},'${unit}','${safeImg}','${p.category}')">
+          const key = registerRenderedProduct(p);
+          const price = productFixedPrice(p);
+          const priceHTML = !productCanAdd(p)
+            ? productStatusLabel(p)
+            : `$${price.toFixed(2)}<span class="specials-item-unit"> ${productUnit(p)}</span>`;
+          return `<div class="specials-item" onclick="openProductModalByKey(${jsArg(key)})">
             <div class="specials-item-img">${p.img ? `<img src="${p.img}" alt="" loading="lazy">` : ''}</div>
             <div class="specials-item-info">
               <div class="specials-item-name">${cleanName(p.name)}</div>
-              <div class="specials-item-price">$${p.price.toFixed(2)}<span class="specials-item-unit"> ${unit}</span></div>
+              <div class="specials-item-price">${priceHTML}</div>
             </div>
           </div>`;
         }).join('')}</div>
@@ -1481,28 +2395,39 @@ async function renderHome(page, search) {
   observeAnims();
 }
 
-async function renderCategory(route, page, search) {
+async function renderHome(page, search) {
   const app = document.getElementById('app');
-  app.innerHTML = `<div class="page-layout">
-    <main><div class="loading"><div class="loading-spinner"></div>Loading...</div></main></div>`;
-  updateGlobalSidebar();
 
-  let items;
   if (search) {
-    const all = await ProductAPI.getByCategory(route.category);
-    const q = search.toLowerCase();
-    items = all.filter(p => p.name.toLowerCase().includes(q));
-  } else {
-    items = await ProductAPI.getByCategory(route.category);
+    const displayResults = await ProductAPI.searchDisplay(search);
+    renderHomeSearchContent(app, page, search, displayResults);
+    ProductAPI.search(search).then(results => {
+      if (routeStillCurrent('/', page, search)) renderHomeSearchContent(app, page, search, results);
+    }).catch(error => console.warn('Live search hydration failed', error));
+    return;
   }
+
+  const [counts, displayAll] = await Promise.all([
+    ProductAPI.getCategoryCounts(),
+    ProductAPI.getAllDisplay()
+  ]);
+  renderHomeContent(app, page, displayAll, counts);
+
+  ProductAPI.getAll().then(all => {
+    if (routeStillCurrent('/', page, '')) renderHomeContent(app, page, all, counts);
+  }).catch(error => console.warn('Live home hydration failed', error));
+}
+
+function renderCategoryContent(app, route, page, search, sourceItems) {
+  let items = sourceItems;
   items = sortProducts(items, currentSort);
 
   const totalPages = Math.ceil(items.length / ITEMS_PER_PAGE);
   const pageItems = items.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
   const c = CAT_COLORS[route.category] || ['#f5f4f0','#eeedea'];
 
-  const mainEl = app.querySelector('main');
-  mainEl.innerHTML = `
+  app.innerHTML = `<div class="page-layout">
+    <main>
       <div class="page-header" style="background:linear-gradient(160deg,${c[0]} 0%,${c[1]} 100%);margin:-48px -2rem 24px;padding:40px 2rem 30px">
         <div class="page-header-icon">${CAT_ICONS[route.category] || '📦'}</div>
         <h2>${route.name}</h2>
@@ -1511,8 +2436,30 @@ async function renderCategory(route, page, search) {
       ${sortBarHTML(items.length)}
       ${items.length === 0 ? '<div class="nr"><div class="nre">&#128269;</div><h3>No products found</h3><p>Try a different search term</p></div>' : ''}
       <div class="pg">${pageItems.map(p => productCard(p)).join('')}</div>
-      ${paginationHTML(page, totalPages)}`;
+      ${paginationHTML(page, totalPages)}
+    </main>
+  </div>`;
+  updateGlobalSidebar();
   observeAnims();
+}
+
+async function renderCategory(route, page, search) {
+  const app = document.getElementById('app');
+
+  const filterSearch = items => {
+    if (!search) return items;
+    const q = search.toLowerCase();
+    return items.filter(p => p.name.toLowerCase().includes(q));
+  };
+
+  const displayItems = filterSearch(await ProductAPI.getByCategoryDisplay(route.category));
+  renderCategoryContent(app, route, page, search, displayItems);
+
+  ProductAPI.getByCategory(route.category).then(items => {
+    if (routeStillCurrent(route.path, page, search)) {
+      renderCategoryContent(app, route, page, search, filterSearch(items));
+    }
+  }).catch(error => console.warn('Live category hydration failed', error));
 }
 
 // Subcategory data cache
@@ -1524,17 +2471,12 @@ async function loadSubCatData() {
   return subCatData;
 }
 
-async function renderSubCategory(catName, page, search) {
-  const app = document.getElementById('app');
-  app.innerHTML = `<div class="page-layout">
-    <main><div class="loading"><div class="loading-spinner"></div>Loading...</div></main></div>`;
-  updateGlobalSidebar();
-
+async function getStaticSubCategoryItems(catName) {
   const data = await loadSubCatData();
   const topAll = await ProductAPI._load();
   const imgLookup = {};
   for (const t of topAll) if (t.img) imgLookup[t.name.toUpperCase()] = {img: t.img, pcode: t.pcode, rank: t.rank || 9999, sales: t.sales || 0};
-  let items = (data[catName] || []).map(p => {
+  return (data[catName] || []).map(p => {
     const match = imgLookup[p.name.toUpperCase()];
     return {
       name: p.name,
@@ -1550,7 +2492,10 @@ async function renderSubCategory(catName, page, search) {
     if (!/EGG/.test(n) || /EGGPLANT|PEGGONI|PAPPARDELLE|FETTUC|LINGUINE|RELISH|TOMATO|LEGGING/.test(n)) return true;
     return /BIG BOY/i.test(n);
   });
+}
 
+function renderSubCategoryContent(app, catName, page, search, sourceItems) {
+  let items = sourceItems;
   if (search) {
     const q = search.toLowerCase();
     items = items.filter(p => p.name.toLowerCase().includes(q));
@@ -1561,8 +2506,8 @@ async function renderSubCategory(catName, page, search) {
   const pageItems = items.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
   const icon = catIcon(catName, null, 'page-header-photo');
 
-  const mainEl = app.querySelector('main');
-  mainEl.innerHTML = `
+  app.innerHTML = `<div class="page-layout">
+    <main>
       <div class="page-header" style="background:linear-gradient(160deg,${subCatColor(catName)[0]} 0%,${subCatColor(catName)[1]} 100%);margin:-48px -2rem 24px;padding:40px 2rem 30px">
         <div class="page-header-icon">${icon}</div>
         <h2>${catName}</h2>
@@ -1571,8 +2516,31 @@ async function renderSubCategory(catName, page, search) {
       ${sortBarHTML(items.length)}
       ${items.length === 0 ? '<div class="nr"><div class="nre">&#128269;</div><h3>No products found</h3></div>' : ''}
       <div class="pg">${pageItems.map(p => productCard(p)).join('')}</div>
-      ${paginationHTML(page, totalPages)}`;
+      ${paginationHTML(page, totalPages)}
+    </main>
+  </div>`;
+  updateGlobalSidebar();
   observeAnims();
+}
+
+async function renderSubCategory(catName, page, search) {
+  const app = document.getElementById('app');
+  const livePath = '/cat/' + catName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/, '');
+
+  if (FRUIT_VEG_LIVE_CATEGORIES.has(catName)) {
+    const displayItems = (await LivePricingAPI.getAllLiveFruitVegDisplayProducts())
+      .filter(product => product.category === catName);
+    renderSubCategoryContent(app, catName, page, search, displayItems);
+
+    LivePricingAPI.getAllLiveFruitVegProducts().then(products => {
+      if (routeStillCurrent(livePath, page, search)) {
+        renderSubCategoryContent(app, catName, page, search, products.filter(product => product.category === catName));
+      }
+    }).catch(error => console.warn('Live subcategory hydration failed', error));
+    return;
+  }
+
+  renderSubCategoryContent(app, catName, page, search, await getStaticSubCategoryItems(catName));
 }
 
 function updateGlobalSidebar() {
@@ -1693,9 +2661,7 @@ function getSeasonalProduce() {
 
 async function getSpecialsItems() {
   const all = await ProductAPI.getBestSellers(100);
-  const withImg = all.filter(p => p.img);
-  const shuffled = withImg.sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, 8);
+  return getSpecialsItemsFrom(all);
 }
 
 /* ================================================================
@@ -1943,13 +2909,14 @@ function renderTerms() {
 /* ================================================================
    FAVOURITES PAGE
    ================================================================ */
-function renderFavourites(page) {
+async function renderFavourites(page) {
   const app = document.getElementById('app');
-  const items = favs.map(f => ({
+  let items = favs.map(f => ({
     name: f.name, price: f.price, pcode: f.pcode,
     category: f.category, img: f.img || '',
     rank: 0, sales: 0
   }));
+  items = await LivePricingAPI.hydrateMixedProducts(items);
   const sorted = sortProducts(items, currentSort);
   const totalPages = Math.ceil(sorted.length / ITEMS_PER_PAGE);
   const pageItems = sorted.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
@@ -2062,7 +3029,7 @@ async function handleRoute() {
   if (path === '/contact') { renderContact(); updateGlobalSidebar(); return; }
   if (path === '/privacy') { renderPrivacy(); updateGlobalSidebar(); return; }
   if (path === '/terms') { renderTerms(); updateGlobalSidebar(); return; }
-  if (path === '/favourites') { renderFavourites(page); return; }
+  if (path === '/favourites') { await renderFavourites(page); return; }
 
   // Handle subcategory routes: /cat/slug
   if (path.startsWith('/cat/')) {
@@ -2115,7 +3082,15 @@ function closeSearchDropdown() {
 
 async function showSearchPredictions(query) {
   if (!query || query.length < 2) { closeSearchDropdown(); return; }
-  const results = await ProductAPI.search(query);
+  const displayResults = await ProductAPI.searchDisplay(query);
+  if (siInput.value.trim() !== query) return;
+  renderSearchPredictionResults(query, displayResults);
+  ProductAPI.search(query).then(results => {
+    if (siInput.value.trim() === query) renderSearchPredictionResults(query, results);
+  }).catch(error => console.warn('Live search dropdown hydration failed', error));
+}
+
+function renderSearchPredictionResults(query, results) {
   if (!results.length) {
     searchDrop.innerHTML = '<div class="sd-empty">No products found for "' + query.replace(/</g,'&lt;') + '"</div>';
     searchDrop.classList.add('show');
@@ -2125,16 +3100,16 @@ async function showSearchPredictions(query) {
   const total = results.length;
   let html = '<div class="sd-header">Products (' + total + ' found)</div>';
   html += shown.map(p => {
+    const key = registerRenderedProduct(p);
     const name = cleanName(p.name);
-    const safeName = name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-    const safeImg = (p.img || '').replace(/'/g, "\\'");
-    const unit = getUnit(p.name);
-    const c = CAT_COLORS[p.category] || ['#f5f4f0','#eeedea'];
+    const colorCategory = displayCategory(p.category);
+    const c = CAT_COLORS[colorCategory] || ['#f5f4f0','#eeedea'];
     const imgHtml = p.img
       ? `<img src="${p.img}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display=''">`
       : '';
     const emojiStyle = p.img ? 'display:none' : '';
-    return `<div class="sd-item" data-pcode="${p.pcode}" data-name="${safeName}" data-price="${p.price}" data-unit="${unit}" data-img="${safeImg}" data-cat="${p.category}">
+    const canAdd = productCanAdd(p);
+    return `<div class="sd-item" data-key="${escapeAttr(key)}">
       <div class="sd-img" style="background:linear-gradient(145deg,${c[0]},${c[1]})">
         ${imgHtml}<span class="sd-emoji" style="${emojiStyle}">${getEmoji(p.name, p.category)}</span>
       </div>
@@ -2142,8 +3117,8 @@ async function showSearchPredictions(query) {
         <div class="sd-name">${highlightMatch(name, query)}</div>
         <div class="sd-cat">${p.category}</div>
       </div>
-      <div class="sd-price">$${p.price.toFixed(2)}<span class="sd-unit">${unit}</span></div>
-      <button class="sd-add" title="Add to cart">+</button>
+      <div class="sd-price${canAdd ? '' : ' unavailable'}">${searchPriceHTML(p)}</div>
+      <button class="sd-add" title="Add to cart" ${canAdd ? '' : 'disabled'}>+</button>
     </div>`;
   }).join('');
   if (total > 8) {
@@ -2156,13 +3131,13 @@ async function showSearchPredictions(query) {
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
       const row = btn.closest('.sd-item');
-      addToCart(row.dataset.pcode, row.dataset.name, parseFloat(row.dataset.price), row.dataset.unit, row.dataset.img, row.dataset.cat);
+      addProductToCartByKey(row.dataset.key);
     });
   });
   searchDrop.querySelectorAll('.sd-item').forEach(row => {
     row.addEventListener('click', () => {
       closeSearchDropdown();
-      openProductModal(row.dataset.pcode, row.dataset.name, parseFloat(row.dataset.price), row.dataset.unit, row.dataset.img, row.dataset.cat);
+      openProductModalByKey(row.dataset.key);
     });
   });
   const seeAll = document.getElementById('sdSeeAll');
